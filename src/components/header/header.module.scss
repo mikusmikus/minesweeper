@@ -1,21 +1,76 @@
-.header{
-        margin: 0 auto ;
-        width: 100%;
-        max-width: 600px;
-        display: flex;
-        border: none;
-        height: 70px;
-        padding: 0;
-        align-items: center;
-        justify-content: space-between;
-        background-color: white;
-        padding: 2px 20px;
-}
-.button{
+$greyBGColor: rgb(197, 197, 197);
+$greyDarker: rgb(168, 168, 168);
+$fontSize: 16px;
+$FontFamily: 'Goldman', cursive;
+$TextShadow: 0px 0px 1px rgb(255, 255, 255);
 
+.header {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    border: none;
+    height: 70px;
+    padding: 0;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $greyBGColor;
+    padding: 2px 20px;
+    // border: 1px solid black;
+    // border-top: none;
+    z-index: 10;
 }
-.startFinish{
+
+.button {
+    padding: 5px 10px;
+    font-family: $FontFamily;
+    background-color: $greyDarker;
+    font-size: $fontSize;
+    text-shadow: $TextShadow;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.8;
+    }
+    &:disabled{
+        color: rgba(0, 0, 0, 0.5);
+        cursor: not-allowed;
+    }
+}
+
+.startFinish {
     display: block;
     width: 100%;
-    background-color: yellowgreen;
+}
+
+.triangle{
+    position: absolute;
+    top:100%;
+    left: 40%;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-top: 35px solid $greyDarker;
+    padding: 0;
+    background-color: transparent;
+    &:hover{
+        opacity: 0.8;
+    }
+}
+
+.triangleButton {
+    position: absolute;
+    left: -30px;
+    top: -32px;
+    text-shadow: $TextShadow;
+    display: block;
+    min-width: 60px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    text-align: center;
+    padding: 0px 0px 10px 0px;
+    font-family: $FontFamily;
 }

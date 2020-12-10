@@ -1,2 +1,2 @@
 this is minesweeper game.
-http://mikusmikus.github.io/minesweeper
+http://mikusmikus.github.io/mineswnpmeeper

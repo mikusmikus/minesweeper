@@ -1,8 +1,10 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
 import { cloneDeep, round } from 'lodash';
-import OneCell from '../minesweeperCell/oneCell';
+import OneCell from '../oneCell/oneCell';
 import Header from '../header/header';
+import Results from '../results/results';
+import GameOver from '../gameOver/gameOver';
 import {
   drawBombs,
   drawGrid,
@@ -16,13 +18,13 @@ import style from './minesweeper.module.scss';
 let isGameStarted = false;
 let gameOver = false;
 let firstMoveDone = false;
-let disabled = false;
-
+let isGridDisabled = false;
 
 const Minesweeper = () => {
   const [gridSize, setGridSize] = useState(15);
   const [difficulty, setDifficulty] = useState(3);
   const [grid, setGrid] = useState(drawGrid(gridSize));
+  const [showResults, setShowResults] = useState(false);
 
   const handleOpen = (rowI: number, colI: number) => {
     const copyGrid = cloneDeep(grid);
@@ -34,7 +36,7 @@ const Minesweeper = () => {
     if (grid[rowI][colI].cell === 'bomb') {
       const gameOverGrid = drawGameOver(gridSize, copyGrid);
       gameOver = true;
-      disabled = true;
+      isGridDisabled = true;
       setGrid(gameOverGrid);
       return;
     }
@@ -52,23 +54,6 @@ const Minesweeper = () => {
       setGrid(gridAdjacent);
     }
   };
-
-  const handleStart = () => {
-    const copyGrid = drawGrid(gridSize);
-    setGrid(copyGrid);
-    isGameStarted = !isGameStarted;
-    firstMoveDone = false;
-    gameOver = false;
-    disabled = false;
-  };
-
-  const handleGridSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setGridSize(parseInt(e.target.value, 10));
-  };
-  const handleDifficultyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDifficulty(parseInt(e.target.value, 10));
-  };
-
   const hadleRightClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     index1: number,
@@ -80,8 +65,20 @@ const Minesweeper = () => {
     setGrid(copyGrid);
   };
 
-  const minesweeperStyle = {
-    maxWidth: `${gridSize * 20}px`,
+  const handleStart = () => {
+    const copyGrid = drawGrid(gridSize);
+    setGrid(copyGrid);
+    isGameStarted = !isGameStarted;
+    firstMoveDone = false;
+    gameOver = false;
+    isGridDisabled = false;
+  };
+  const handleRestart = () => {
+    const copyGrid = drawGrid(gridSize);
+    setGrid(copyGrid);
+    firstMoveDone = false;
+    gameOver = false;
+    isGridDisabled = false;
   };
 
   return (
@@ -90,19 +87,28 @@ const Minesweeper = () => {
         <div className="col-xs-12">
           <Header
             handleStart={() => handleStart()}
+            handleRestart={() => handleRestart()}
             gameOver={gameOver}
-            handleGridSizeChange={(e) => handleGridSizeChange(e)}
+            handleShowResults={() => setShowResults(!showResults)}
+            handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
+            showResults={showResults}
             gameSize={gridSize}
             isGameStarted={isGameStarted}
             gameDifficulty={difficulty}
-            handleDifficultyChange={(e) => handleDifficultyChange(e)}
+            handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}
           />
+          <Results showResults={showResults} />
         </div>
       </div>
       <div className="row">
         <div className="col-xs-12">
           {isGameStarted && (
-            <div className={style.minesweeper} style={minesweeperStyle}>
+            <div
+              className={style.minesweeper}
+              style={{
+                maxWidth: `${gridSize * 20}px`,
+              }}
+            >
               {grid.map((RowArr, rowI) =>
                 RowArr.map((oneCell, colI) => (
                   <OneCell
@@ -110,11 +116,13 @@ const Minesweeper = () => {
                     oneCell={oneCell}
                     hadleRightClick={(e) => hadleRightClick(e, rowI, colI)}
                     handleOpen={() => handleOpen(rowI, colI)}
-                    disabled={disabled}
+                    isGridDisabled={isGridDisabled}
                     gridSize={gridSize}
                   />
                 ))
               )}
+
+              {gameOver && <GameOver />}
             </div>
           )}
         </div>

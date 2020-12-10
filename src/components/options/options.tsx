@@ -24,7 +24,7 @@ const Options: FC<Props> = ({
           name="gameSize"
           value={gameSize}
           onChange={handleGridSizeChange}
-          //   className={style.button}
+          className={style.select}
         >
           {GAME_SIZE.map(({ name, size }) => (
             <option key={name} value={size} className={style.option}>
@@ -40,7 +40,7 @@ const Options: FC<Props> = ({
           name="difficulty"
           value={gameDifficulty}
           onChange={handleDifficultyChange}
-          //   className={style.button}
+          className={style.select}
         >
           {GAME_DIFICULTY.map(({ name, difficulty }) => (
             <option key={name} value={difficulty} className={style.option}>

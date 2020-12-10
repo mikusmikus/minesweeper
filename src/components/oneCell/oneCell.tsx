@@ -7,11 +7,11 @@ type Props = {
   oneCell: Grid;
   hadleRightClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   handleOpen: () => void;
-  disabled: boolean;
+  isGridDisabled: boolean;
   gridSize: number;
 };
 
-const OneCell: FC<Props> = ({ oneCell, handleOpen, hadleRightClick, gridSize, disabled }) => {
+const OneCell: FC<Props> = ({ oneCell, handleOpen, hadleRightClick, gridSize, isGridDisabled }) => {
   const { isOpen, haveFlag, cell } = oneCell;
 
   const cellStyle = {
@@ -40,7 +40,7 @@ const OneCell: FC<Props> = ({ oneCell, handleOpen, hadleRightClick, gridSize, di
           className={`${style.cellClose} ${haveFlag && style.flag}`}
           style={cellStyle}
           onClick={handleOpen}
-          disabled={disabled}
+          disabled={isGridDisabled}
           onContextMenu={(e) => hadleRightClick(e)}
         >
           {' '}

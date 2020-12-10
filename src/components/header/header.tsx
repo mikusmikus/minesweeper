@@ -7,7 +7,10 @@ type Props = {
   gameSize: number;
   gameDifficulty: number;
   isGameStarted: boolean;
+  showResults: boolean;
+  handleShowResults: () => void;
   handleStart: () => void;
+  handleRestart: () => void;
   handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
@@ -15,9 +18,12 @@ type Props = {
 const Header: FC<Props> = ({
   gameOver,
   gameSize,
+  handleShowResults,
   gameDifficulty,
   isGameStarted,
+  showResults,
   handleStart,
+  handleRestart,
   handleGridSizeChange,
   handleDifficultyChange,
 }) => {
@@ -28,12 +34,17 @@ const Header: FC<Props> = ({
           <>
             <div className="col-xs-3">
               <div className={style.startFinish}>
-                <button type="button" onClick={handleStart} className={style.button}>
+                <button
+                  type="button"
+                  onClick={handleStart}
+                  className={style.button}
+                  disabled={showResults}
+                >
                   Start
                 </button>
               </div>
             </div>
-            <div className="col-xs-6">
+            <div className="col-xs-9">
               <Options
                 gameSize={gameSize}
                 gameDifficulty={gameDifficulty}
@@ -41,7 +52,11 @@ const Header: FC<Props> = ({
                 handleDifficultyChange={handleDifficultyChange}
               />
             </div>
-            <div className="col-xs-3">Results</div>
+            <span className={style.triangle}>
+              <button type="button" onClick={handleShowResults} className={style.triangleButton}>
+                {showResults ? 'close' : 'results'}
+              </button>
+            </span>
           </>
         ) : (
           <>
@@ -51,7 +66,11 @@ const Header: FC<Props> = ({
               </button>
             </div>
             <div className="col-xs-6">count / time</div>
-            <div className="col-xs-3">Results</div>
+            <span className={style.triangle}>
+              <button type="button" onClick={handleRestart} className={style.triangleButton}>
+                restart
+              </button>
+            </span>
           </>
         )}
       </div>
