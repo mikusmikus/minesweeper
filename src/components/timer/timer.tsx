@@ -3,7 +3,7 @@ import style from './timer.module.scss';
 
 type Props = {
   isTimerStarted: boolean;
-  getTimerValue: (x: number) => void;
+  getTimerValue: (time: number) => void;
 };
 
 const Timer: FC<Props> = ({ isTimerStarted, getTimerValue }) => {
