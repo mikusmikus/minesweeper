@@ -6,8 +6,6 @@ export type Cell = { rowI: number; colI: number };
 export type CellText = 'bomb' | 'empty' | number;
 export type Grid = { id: number; cell: CellText; isOpen: boolean; haveFlag: boolean };
 
-
-
 export const drawGrid = (size: number) => {
   let gridArr: Grid[] = [];
   const gridArr2d: Grid[][] = [];
@@ -23,7 +21,7 @@ export const drawGrid = (size: number) => {
   return gridArr2d;
 };
 
-export const drawBombs = (cell: Cell, bombCount:number, grid: Grid[][]): Grid[][] => {
+export const drawBombs = (cell: Cell, bombCount: number, grid: Grid[][]): Grid[][] => {
   const gridCopy = cloneDeep(grid);
   gridCopy.forEach((arr) => {
     const randomNumber = random(1, bombCount);
@@ -100,10 +98,21 @@ export const drawGameOver = (size: number, grid: Grid[][]): Grid[][] => {
   const gridCopy = cloneDeep(grid);
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
-      if (gridCopy[i][j].cell === 'bomb'){
+      if (gridCopy[i][j].cell === 'bomb') {
         gridCopy[i][j].isOpen = true;
       }
     }
   }
   return gridCopy;
+};
+
+export const checkWinner = (size: number, grid: Grid[][]): boolean => {
+  
+  return !grid.some((array) =>
+    array.some((item) => {
+      return (item.cell !== 'bomb' && !item.isOpen);
+    })
+  );
+
+
 };

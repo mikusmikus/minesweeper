@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import style from './options.module.scss';
-import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays';
+import type {GameSize, GameDifficulty} from '../../helpers/optionArrays';
 
 type Props = {
   gameSize: number;
   gameDifficulty: number;
+  gameSizeArr: GameSize[]
+  gameDifficultyArr: GameDifficulty[]
   handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
@@ -12,6 +14,8 @@ type Props = {
 const Options: FC<Props> = ({
   gameSize,
   gameDifficulty,
+  gameSizeArr,
+  gameDifficultyArr,
   handleGridSizeChange,
   handleDifficultyChange,
 }) => {
@@ -26,7 +30,7 @@ const Options: FC<Props> = ({
           onChange={handleGridSizeChange}
           className={style.select}
         >
-          {GAME_SIZE.map(({ name, size }) => (
+          {gameSizeArr.map(({ name, size }) => (
             <option key={name} value={size} className={style.option}>
               {name}
             </option>
@@ -42,7 +46,7 @@ const Options: FC<Props> = ({
           onChange={handleDifficultyChange}
           className={style.select}
         >
-          {GAME_DIFICULTY.map(({ name, difficulty }) => (
+          {gameDifficultyArr.map(({ name, difficulty }) => (
             <option key={name} value={difficulty} className={style.option}>
               {name}
             </option>

@@ -1,13 +1,16 @@
 import React, { FC } from 'react';
 import style from './header.module.scss';
 import Options from '../options/options';
+import type { GameSize, GameDifficulty } from '../../helpers/optionArrays';
 
 type Props = {
-  gameOver: boolean;
+  isGameStarted: boolean;
+  firstMoveDone: boolean;
+  showResults: boolean;
   gameSize: number;
   gameDifficulty: number;
-  isGameStarted: boolean;
-  showResults: boolean;
+  gameSizeArr: GameSize[];
+  gameDifficultyArr: GameDifficulty[];
   handleShowResults: () => void;
   handleStart: () => void;
   handleRestart: () => void;
@@ -16,12 +19,14 @@ type Props = {
 };
 
 const Header: FC<Props> = ({
-  gameOver,
+  firstMoveDone,
+  showResults,
+  gameSizeArr,
   gameSize,
-  handleShowResults,
   gameDifficulty,
   isGameStarted,
-  showResults,
+  gameDifficultyArr,
+  handleShowResults,
   handleStart,
   handleRestart,
   handleGridSizeChange,
@@ -50,6 +55,8 @@ const Header: FC<Props> = ({
                 gameDifficulty={gameDifficulty}
                 handleGridSizeChange={handleGridSizeChange}
                 handleDifficultyChange={handleDifficultyChange}
+                gameSizeArr={gameSizeArr}
+                gameDifficultyArr={gameDifficultyArr}
               />
             </div>
             <span className={style.triangle}>
@@ -66,11 +73,13 @@ const Header: FC<Props> = ({
               </button>
             </div>
             <div className="col-xs-6">count / time</div>
-            <span className={style.triangle}>
-              <button type="button" onClick={handleRestart} className={style.triangleButton}>
-                restart
-              </button>
-            </span>
+            {firstMoveDone && (
+              <span className={style.triangle}>
+                <button type="button" onClick={handleRestart} className={style.triangleButton}>
+                  restart
+                </button>
+              </span>
+            )}
           </>
         )}
       </div>

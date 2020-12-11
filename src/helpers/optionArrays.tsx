@@ -14,7 +14,7 @@ export const GAME_SIZE: GameSize[] = [
 ];
 
 export const GAME_DIFICULTY: GameDifficulty[] = [
-  { name: 'easy', difficulty: 5 },
+  { name: 'easy', difficulty: 10 },
   { name: 'medium', difficulty: 3 },
   { name: 'hard', difficulty: 2 },
 ];

@@ -5,6 +5,9 @@ import OneCell from '../oneCell/oneCell';
 import Header from '../header/header';
 import Results from '../results/results';
 import GameOver from '../gameOver/gameOver';
+import Winner from '../winner/winner';
+import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays';
+
 import {
   drawBombs,
   drawGrid,
@@ -12,19 +15,22 @@ import {
   drawAroundFirstClicked,
   adjacentCellsNoBombs,
   drawGameOver,
+  checkWinner,
 } from '../../helpers/helperFunctions';
 import style from './minesweeper.module.scss';
 
 let isGameStarted = false;
-let gameOver = false;
+let isGameOver = false;
+let isWinner = false;
 let firstMoveDone = false;
 let isGridDisabled = false;
 
 const Minesweeper = () => {
-  const [gridSize, setGridSize] = useState(15);
-  const [difficulty, setDifficulty] = useState(3);
+  const [gridSize, setGridSize] = useState(10);
+  const [difficulty, setDifficulty] = useState(10);
   const [grid, setGrid] = useState(drawGrid(gridSize));
   const [showResults, setShowResults] = useState(false);
+  const [winnerName, setWinnerName] = useState('');
 
   const handleOpen = (rowI: number, colI: number) => {
     const copyGrid = cloneDeep(grid);
@@ -35,7 +41,7 @@ const Minesweeper = () => {
     }
     if (grid[rowI][colI].cell === 'bomb') {
       const gameOverGrid = drawGameOver(gridSize, copyGrid);
-      gameOver = true;
+      isGameOver = true;
       isGridDisabled = true;
       setGrid(gameOverGrid);
       return;
@@ -51,6 +57,9 @@ const Minesweeper = () => {
     } else {
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, copyGrid);
       gridAdjacent[rowI][colI].isOpen = true;
+      if (checkWinner(gridSize, gridAdjacent)) {
+        isWinner = true;
+      }
       setGrid(gridAdjacent);
     }
   };
@@ -70,15 +79,21 @@ const Minesweeper = () => {
     setGrid(copyGrid);
     isGameStarted = !isGameStarted;
     firstMoveDone = false;
-    gameOver = false;
+    isGameOver = false;
     isGridDisabled = false;
+    isWinner = false;
   };
   const handleRestart = () => {
     const copyGrid = drawGrid(gridSize);
     setGrid(copyGrid);
     firstMoveDone = false;
-    gameOver = false;
+    isGameOver = false;
     isGridDisabled = false;
+    isWinner = false;
+  };
+  const handleWinner = () => {
+    console.log(winnerName);
+    setWinnerName('');
   };
 
   return (
@@ -86,15 +101,17 @@ const Minesweeper = () => {
       <div className="row">
         <div className="col-xs-12">
           <Header
+            isGameStarted={isGameStarted}
+            firstMoveDone={firstMoveDone}
+            showResults={showResults}
+            gameSizeArr={GAME_SIZE}
+            gameDifficultyArr={GAME_DIFICULTY}
+            gameSize={gridSize}
+            gameDifficulty={difficulty}
             handleStart={() => handleStart()}
             handleRestart={() => handleRestart()}
-            gameOver={gameOver}
             handleShowResults={() => setShowResults(!showResults)}
             handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
-            showResults={showResults}
-            gameSize={gridSize}
-            isGameStarted={isGameStarted}
-            gameDifficulty={difficulty}
             handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}
           />
           <Results showResults={showResults} />
@@ -106,7 +123,7 @@ const Minesweeper = () => {
             <div
               className={style.minesweeper}
               style={{
-                maxWidth: `${gridSize * 20}px`,
+                maxWidth: `${gridSize * 25}px`,
               }}
             >
               {grid.map((RowArr, rowI) =>
@@ -121,8 +138,14 @@ const Minesweeper = () => {
                   />
                 ))
               )}
-
-              {gameOver && <GameOver />}
+              {isGameOver && <GameOver />}
+              {isWinner && (
+                <Winner
+                  winnerName={winnerName}
+                  handleWinnerName={(e) => setWinnerName(e.target.value)}
+                  handleWinner={() => handleWinner()}
+                />
+              )}
             </div>
           )}
         </div>

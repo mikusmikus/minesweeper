@@ -12,7 +12,7 @@ const Results: FC<Props> = ({ showResults }) => {
       <h5 className={style.heading}>Results</h5>
       <table className={style.table}>
         <thead>
-          <tr>
+          <tr className={style.tableTh}>
             <th>#</th>
             <th>name</th>
             <th>score</th>
@@ -21,70 +21,70 @@ const Results: FC<Props> = ({ showResults }) => {
           </tr>
         </thead>
         <tbody>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
             <td>44</td>
             <td>42</td>
           </tr>
-          <tr className={style.resultList}>
+          <tr className={style.tableTr}>
             <td>1</td>
             <td>janios</td>
             <td>22</td>
@@ -92,7 +92,7 @@ const Results: FC<Props> = ({ showResults }) => {
             <td>42</td>
           </tr>
           {/* {results.map(({ id, name, score, speedLevel, gridSize }, index) => ( */}
-          {/* <tr key={id} className={style.resultList}>
+          {/* <tr key={id} className={style.resultTr}>
             <td>{index + 1}</td>
             <td>{name.substring(0, 12)}</td>
             <td>{score}</td>

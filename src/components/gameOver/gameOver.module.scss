@@ -1,4 +1,5 @@
 $whiteColor: white;
+$redColor : rgb(160,0,0);
 
 .gameOver {
     position: absolute;
@@ -10,23 +11,24 @@ $whiteColor: white;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    line-height: 1;
 }
-.gameOverGG{
-    font-size: 80px;
-    animation: gg 2s infinite;
-    font-size: 100px;
-    font-weight: 700;
-    margin-bottom: 30px;
-}
+
 .gameOverText{
     font-size: 15px;
     font-weight: 700;
     color: $whiteColor;
     padding: 2px 5px;
     text-shadow: 0 0 3px rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.7);
-    
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.gameOverGG{
+    font-size: 120px;
+    color: $redColor;
+    font-weight: 700;
+    margin-bottom: 30px;
+    animation: gg 2s infinite;
+    animation-iteration-count: 3;
 }
 @keyframes gg {
     0% {
@@ -34,8 +36,8 @@ $whiteColor: white;
         opacity: 0.5;
     }
     50% {
-        color: rgb(160, 1, 1);
-        transform: scale(2);
+        color: $redColor;
+        transform: scale(2.7);
         opacity: 1;
     }
     100% {
