@@ -29,10 +29,13 @@ $fontSize24: 24px;
 .gameOverGG {
     font-size:150px;
     color: $red;
+    padding-top: 20px;
     font-weight: 700;
+    margin: 0;
     margin-bottom: 30px;
     animation: gg 2s infinite;
     animation-iteration-count: 3;
+    // transform: scale(2.5);
 }
 
 @keyframes gg {
@@ -42,7 +45,8 @@ $fontSize24: 24px;
     }
     50% {
         color: $red;
-        transform: scale(2.7);
+        transform: scale(2.5);
+        transform: translateY(200px);
         opacity: 1;
     }
     100% {

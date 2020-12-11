@@ -39,23 +39,12 @@ const Minesweeper = () => {
   const [showResults, setShowResults] = useState(false);
   const [winnerName, setWinnerName] = useState('');
   const [winners, setWinners] = useState<typeWinner[]>([]);
-  const [startTimer, setStartTimer] = useState(false);
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
     const minesweeperStorage = localStorage.getItem('minesweeper');
     minesweeperStorage && setWinners(JSON.parse(minesweeperStorage));
   }, []);
-
-  useEffect(() => {
-    const myInterval = setInterval(() => {
-      if (isTimerStarted) {
-        setTimer((oldTimer) => oldTimer + 1);
-      } else {
-        clearInterval(myInterval);
-      }
-    }, 1000);
-  }, [startTimer]);
 
   const handleOpen = (rowI: number, colI: number) => {
     const copyGrid = cloneDeep(grid);
@@ -78,10 +67,9 @@ const Minesweeper = () => {
       const gridEmtptyFirst = drawAroundFirstClicked(cell, gridSize, gridWithBombs);
       const gridWithNumber = drawNumbers(gridSize, gridEmtptyFirst);
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, gridWithNumber);
-      setStartTimer(!startTimer);
+      isTimerStarted = true;
       setGrid(gridAdjacent);
       isFirstMoveDone = true;
-      isTimerStarted = true;
     } else {
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, copyGrid);
       gridAdjacent[rowI][colI].isOpen = true;
@@ -111,6 +99,7 @@ const Minesweeper = () => {
     isGameOver = false;
     isGridDisabled = false;
     isWinner = false;
+    isTimerStarted = false;
     setTimer(0);
   };
   const handleRestart = () => {
@@ -120,6 +109,7 @@ const Minesweeper = () => {
     isGameOver = false;
     isGridDisabled = false;
     isWinner = false;
+    isTimerStarted = false;
     setTimer(0);
   };
   const handleWinner = () => {
@@ -150,6 +140,11 @@ const Minesweeper = () => {
     });
   };
 
+  const getTimerValue = (time: number) => {
+    setTimer(time);
+    return time;
+  };
+
   return (
     <div className="conatainer">
       <div className="row">
@@ -161,11 +156,12 @@ const Minesweeper = () => {
             gameDifficultyArr={GAME_DIFICULTY}
             gameSize={gridSize}
             gameDifficulty={difficulty}
-            timer={timer}
             handleStart={() => handleStart()}
             handleShowResults={() => setShowResults(!showResults)}
             handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
             handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}
+            isTimerStarted={isTimerStarted}
+            getTimerValue={getTimerValue}
           />
           <Results showResults={showResults} winners={winners} />
         </div>

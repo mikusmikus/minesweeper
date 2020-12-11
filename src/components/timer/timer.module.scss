@@ -1,0 +1,23 @@
+$greyLight: rgb(197, 197, 197);
+$red: rgb(236, 75, 0);
+$fontSize36: 36px;
+
+.timerWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.timer {
+    font-size: $fontSize36;
+    font-weight: 700;
+    min-height: 53px;
+    max-width: 237px;
+    background-color: $greyLight;
+    color: $red;
+    display: flex;
+    padding: 5px 8px;
+    width: 100%;
+    width: 240px;
+    justify-content: center;
+}

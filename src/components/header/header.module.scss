@@ -63,7 +63,8 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 .triangle {
     position: absolute;
     top: 0;
-    left: -120px;
+    left: 0;
+    transform: translateX(-50%);
     border-left: 120px solid transparent;
     border-right: 120px solid transparent;
     border-top: 50px solid $red;
@@ -94,24 +95,4 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     &:hover {
         opacity: 0.8;
     }
-}
-
-.timerWrapper {
-    display: flex;
-    width: 100%;
-    justify-content: flex-end;
-}
-
-.timer {
-    font-size: $fontSize36;
-    font-weight: 700;
-    min-height: 53px;
-    max-width: 237px;
-    background-color: $greyLight;
-    color: $red;
-    display: flex;
-    padding: 5px 8px;
-    width: 100%;
-    width: 240px;
-    justify-content: center;
 }

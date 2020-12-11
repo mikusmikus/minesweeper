@@ -3,6 +3,7 @@ import style from './header.module.scss';
 import Options from '../options/options';
 import type { GameSize, GameDifficulty } from '../../helpers/optionArrays';
 import { timeConvertor } from '../../helpers/helperFunctions';
+import Timer from '../timer/timer';
 
 type Props = {
   isGameStarted: boolean;
@@ -11,7 +12,8 @@ type Props = {
   gameDifficulty: number;
   gameSizeArr: GameSize[];
   gameDifficultyArr: GameDifficulty[];
-  timer: number;
+  isTimerStarted: boolean;
+  getTimerValue: (time: number) => void;
   handleShowResults: () => void;
   handleStart: () => void;
   handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -25,7 +27,8 @@ const Header: FC<Props> = ({
   gameDifficulty,
   isGameStarted,
   gameDifficultyArr,
-  timer,
+  isTimerStarted,
+  getTimerValue,
   handleShowResults,
   handleStart,
   handleGridSizeChange,
@@ -74,9 +77,7 @@ const Header: FC<Props> = ({
               </button>
             </div>
             <div className="col-xs-6 col-xs-offset-2">
-              <div className={style.timerWrapper}>
-                <span className={style.timer}>{timer > 0 && timeConvertor(timer)}</span>
-              </div>
+              <Timer isTimerStarted={isTimerStarted} getTimerValue={getTimerValue} />
             </div>
           </>
         )}

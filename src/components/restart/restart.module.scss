@@ -20,7 +20,8 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 .triangle {
     position: absolute;
     top: -52px;
-    left: -120px;
+    left: 0;
+    transform: translateX(-50%);
     border-left: 120px solid transparent;
     border-right: 120px solid transparent;
     border-bottom: 50px solid $red;
