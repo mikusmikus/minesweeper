@@ -18,7 +18,6 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     flex-direction: column;
     margin: 0 5px;
     padding: 0 5px;
-    text-align: center;
 }
 .select {
     padding: 3px 5px;
@@ -30,6 +29,7 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     border: none;
     outline: none;
     cursor: pointer;
+    text-align: center;
     transition: all 0.2s;
     &:hover {
         opacity: 0.8;
