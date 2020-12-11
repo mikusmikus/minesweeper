@@ -1,7 +1,9 @@
 $greyLight: rgb(209, 209, 209);
 $greyDark: rgb(168, 168, 168);
-$redColor : rgb(160,0,0);
+$red: rgb(236, 75, 0);
 $fontSize16: 16px;
+$fontSize24: 24px;
+$FontFamily: 'Goldman', cursive;
 
 
 
@@ -20,8 +22,8 @@ $fontSize16: 16px;
 }
 
 .heading{
-    font-size: 40px;
-    color: $redColor;
+    font-size: 55px;
+    color: $red;
     animation: winner 2s infinite;
     animation-iteration-count: 3;
 }
@@ -32,7 +34,7 @@ $fontSize16: 16px;
         opacity: 0.5;
     }
     50% {
-        color: $redColor;
+        color: $red;
         transform: scale(3);
         opacity: 1;
     }
@@ -51,20 +53,22 @@ $fontSize16: 16px;
     align-items: center;
     justify-content: center;
     padding: 10px 10px; 
+    font-size: 16px;
 }
 
 .inputWrapper {
     position: relative;
     margin-top: 5px;
-    width: 230px;
+    width: 100%
 }
 
 .input {
     padding: 2px 0 2px 10px;
     width: 100%;
+    font-family: $FontFamily;
+    font-size: $fontSize24;
     border: none;
     border-radius: 2px;
-    font-size: $fontSize16;
     overflow: hidden;
     outline: 0;
 }
@@ -74,8 +78,9 @@ $fontSize16: 16px;
     right: 0;
     top: 0;
     height: 100%;
-    font-size: $fontSize16;
-    background-color: $redColor;
+    font-family: $FontFamily;
+    font-size: $fontSize24;
+    background-color: $red;
     outline: none;
     border: none;
     cursor: pointer;

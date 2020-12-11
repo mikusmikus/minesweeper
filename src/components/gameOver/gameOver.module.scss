@@ -1,5 +1,7 @@
-$whiteColor: white;
-$redColor : rgb(160,0,0);
+$white: white;
+$red: rgb(236, 75, 0);
+$fontSize16: 16px;
+$fontSize24: 24px;
 
 .gameOver {
     position: absolute;
@@ -13,35 +15,38 @@ $redColor : rgb(160,0,0);
     align-items: center;
 }
 
-.gameOverText{
-    font-size: 15px;
+.gameOverText {
+    font-size: $fontSize24;
     font-weight: 700;
-    color: $whiteColor;
+    width: 100%;
+    max-width: 300px;
+    color: $red;
     padding: 2px 5px;
     text-shadow: 0 0 3px rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.gameOverGG{
-    font-size: 120px;
-    color: $redColor;
+.gameOverGG {
+    font-size:150px;
+    color: $red;
     font-weight: 700;
     margin-bottom: 30px;
     animation: gg 2s infinite;
     animation-iteration-count: 3;
 }
+
 @keyframes gg {
     0% {
-        color: $whiteColor;
+        color: $white;
         opacity: 0.5;
     }
     50% {
-        color: $redColor;
+        color: $red;
         transform: scale(2.7);
         opacity: 1;
     }
     100% {
-        color: $whiteColor;
+        color: $white;
         opacity: 0.5;
     }
 }

@@ -1,18 +1,20 @@
 $greyLight: rgb(197, 197, 197);
 $greyDark: rgb(168, 168, 168);
-$redColor : rgb(160,0,0);
-$fontSize24: 24px;
+$red : rgb(236, 75, 0);
 $FontFamily: 'Goldman', cursive;
+$fontSize16: 16px;
+$fontSize24: 24px;
+$fontSize36: 36px;
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 
 .header {
     position: relative;
     margin: 0 auto;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     display: flex;
     border: none;
-    height: 70px;
+    height: 100px;
     padding: 0;
     align-items: center;
     justify-content: space-between;
@@ -22,10 +24,11 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 }
 
 .button {
-    padding: 5px 10px;
+    width: 100%;
+    padding: 5px 8px;
     font-family: $FontFamily;
-    background-color: $greyLight;
-    font-size: $fontSize24;
+    background-color: $red ;
+    font-size: $fontSize36;
     text-shadow: $TextShadow;
     border: none;
     outline: none;
@@ -36,6 +39,9 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     &:disabled {
         color: rgba(0, 0, 0, 0.5);
         cursor: not-allowed;
+        &:hover {
+            opacity: 1;
+        }
     }
 }
 
@@ -47,27 +53,27 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 .triangle {
     position: absolute;
     top: 100%;
-    left: 38.2%;
-    border-left: 70px solid transparent;
-    border-right: 70px solid transparent;
-    border-top: 35px solid $greyLight;
+    left: 35.2%;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-top: 50px solid $red;
     padding: 0;
     background-color: transparent;
     transition: all 0.2s;
     &:hover {
-        border-top: 35px solid $greyDark;
+     opacity: 0.8;
     }
 }
 
 .triangleButton {
     position: absolute;
     text-transform: uppercase;
-    font-size: 16px;
-    left: -39px;
-    top: -36px;
+    font-size: $fontSize24;
+    left: -59px;
+    top: -50px;
     text-shadow: $TextShadow;
     display: block;
-    min-width: 82px;
+    min-width: 122px;
     border: none;
     outline: none;
     cursor: pointer;

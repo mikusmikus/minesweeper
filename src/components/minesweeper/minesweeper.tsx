@@ -1,12 +1,14 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cloneDeep, round } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 import OneCell from '../oneCell/oneCell';
 import Header from '../header/header';
 import Results from '../results/results';
 import GameOver from '../gameOver/gameOver';
 import Winner from '../winner/winner';
 import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays';
+import type { typeWinner } from '../../helpers/types';
 
 import {
   drawBombs,
@@ -31,6 +33,13 @@ const Minesweeper = () => {
   const [grid, setGrid] = useState(drawGrid(gridSize));
   const [showResults, setShowResults] = useState(false);
   const [winnerName, setWinnerName] = useState('');
+  const [winners, setWinners] = useState<typeWinner[]>([]);
+
+  useEffect(() => {
+    const minesweeperStorage = localStorage.getItem('minesweeper');
+    minesweeperStorage && setWinners(JSON.parse(minesweeperStorage));
+  }, []);
+
 
   const handleOpen = (rowI: number, colI: number) => {
     const copyGrid = cloneDeep(grid);
@@ -92,8 +101,21 @@ const Minesweeper = () => {
     isWinner = false;
   };
   const handleWinner = () => {
-    console.log(winnerName);
+    const copyWinners = [...winners];
+    const newWinner:typeWinner = {
+      id: uuidv4(),
+      name: winnerName,
+      time: 23,
+      size: 'large',
+      difficulty: 'hard',
+    };
+
+    isWinner = false;
+    isGameStarted = false;
+    localStorage.setItem('minesweeper', JSON.stringify([...copyWinners, newWinner]));
+    setWinners([...copyWinners, newWinner]);
     setWinnerName('');
+
   };
 
   return (
@@ -114,7 +136,7 @@ const Minesweeper = () => {
             handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
             handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}
           />
-          <Results showResults={showResults} />
+          <Results showResults={showResults} winners={winners} />
         </div>
       </div>
       <div className="row">
@@ -123,7 +145,7 @@ const Minesweeper = () => {
             <div
               className={style.minesweeper}
               style={{
-                maxWidth: `${gridSize * 25}px`,
+                maxWidth: `${gridSize * 30}px`,
               }}
             >
               {grid.map((RowArr, rowI) =>

@@ -23,7 +23,7 @@ const Winner: FC<Props> = ({ winnerName, handleWinnerName, handleWinner }) => {
         <div className={style.inputWrapper}>
           <input
             type="text"
-            placeholder="enter name here..."
+            placeholder="enter name..."
             className={style.input}
             ref={inputEl}
             value={winnerName}

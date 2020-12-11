@@ -1,15 +1,17 @@
 $greyLight: rgb(209, 209, 209);
 $greyDark: rgb(168, 168, 168);
-$redColor : rgb(160,0,0);
+$red : rgb(236, 75, 0);
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
-$fontSize: 30px;
+$fontSize50: 50px;
+$fontSize24: 24px;
+
 // $FontFamily: 'Goldman', cursive;
 
 .results{
     position: relative;
     margin: 0 auto;
     margin-bottom: 20px;
-    max-width: 600px;
+    max-width: 700px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -19,18 +21,21 @@ $fontSize: 30px;
     overflow: hidden;
     height: 0;
     transition: all 0.3s ease-in-out;
-
+    letter-spacing: 1px;
+    font-size: $fontSize24;
 }
 .active {
-    height: 400px;
-    padding: 20px;
-}
-.table{
+    height: 600px;
 
 }
+.table{
+    padding: 20px;
+    max-height: 300px;
+    overflow: auto;
+}
 .tableTh{
-    background-color: $redColor;
-    padding: 2px 5px;
+    background-color: $red;
+
     color: $greyLight;
 }
 .tableTr{
@@ -38,6 +43,7 @@ $fontSize: 30px;
     background-color: $greyDark;
 }
 .heading{
-    font-size: $fontSize;
-    margin: 20px 0;
+    font-size: $fontSize50;
+    margin: 0;
+    padding-top: 50px;
 }

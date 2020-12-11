@@ -10,7 +10,7 @@ export type GameDifficulty = {
 export const GAME_SIZE: GameSize[] = [
   { name: ' small', size: 10 },
   { name: 'medium', size: 15 },
-  { name: 'large', size: 25 },
+  { name: 'large', size: 20 },
 ];
 
 export const GAME_DIFICULTY: GameDifficulty[] = [
