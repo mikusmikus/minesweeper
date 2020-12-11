@@ -3,13 +3,14 @@ import style from './results.module.scss';
 import { timeConvertor } from '../../helpers/helperFunctions';
 import type { typeWinner } from '../../helpers/types';
 
-
 type Props = {
   showResults: boolean;
   winners: typeWinner[];
 };
 
 const Results: FC<Props> = ({ showResults, winners }) => {
+  // uztaisīt filtrāciju winneriem.
+
   return (
     <div className={`${style.results} ${showResults && style.active}`}>
       <h5 className={style.heading}>Results</h5>

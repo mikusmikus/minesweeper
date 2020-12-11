@@ -62,11 +62,13 @@ const Header: FC<Props> = ({
                 gameDifficultyArr={gameDifficultyArr}
               />
             </div>
-            <span className={style.triangle}>
-              <button type="button" onClick={handleShowResults} className={style.triangleButton}>
-                {showResults ? 'close' : 'results'}
-              </button>
-            </span>
+            <div className={style.triangleWrapper}>
+              <span className={style.triangle}>
+                <button type="button" onClick={handleShowResults} className={style.triangleButton}>
+                  {showResults ? 'close' : 'results'}
+                </button>
+              </span>
+            </div>
           </>
         ) : (
           <>
@@ -75,16 +77,11 @@ const Header: FC<Props> = ({
                 END
               </button>
             </div>
-            <div className="col-xs-4 col-xs-offset-4">
-              {timer > 0 && <span className={style.timer}>{timeConvertor(timer)}</span>}
+            <div className="col-xs-6 col-xs-offset-2">
+              <div className={style.timerWrapper}>
+                {timer > 0 && <span className={style.timer}>{timeConvertor(timer)}</span>}
+              </div>
             </div>
-            {isFirstMoveDone && (
-              <span className={style.triangle}>
-                <button type="button" onClick={handleRestart} className={style.triangleButton}>
-                  restart
-                </button>
-              </span>
-            )}
           </>
         )}
       </div>

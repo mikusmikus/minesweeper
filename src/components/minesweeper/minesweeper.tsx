@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { cloneDeep, round } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
 import OneCell from '../oneCell/oneCell';
 import Header from '../header/header';
 import Results from '../results/results';
 import GameOver from '../gameOver/gameOver';
 import Winner from '../winner/winner';
+import Restart from '../restart/restart';
 import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays';
 import type { typeWinner } from '../../helpers/types';
 
@@ -20,13 +22,14 @@ import {
   drawGameOver,
   checkWinner,
 } from '../../helpers/helperFunctions';
+import 'react-toastify/dist/ReactToastify.css';
 import style from './minesweeper.module.scss';
 
 let isGameStarted = false;
 let isGameOver = false;
 let isWinner = false;
 let isFirstMoveDone = false;
-let isTimerStarted = false; 
+let isTimerStarted = false;
 let isGridDisabled = false;
 
 const Minesweeper = () => {
@@ -121,10 +124,9 @@ const Minesweeper = () => {
   };
   const handleWinner = () => {
     const copyWinners = [...winners];
-    const findSizeIndex = GAME_SIZE.findIndex(item => item.size===gridSize);
-    const findDiffIndex = GAME_DIFICULTY.findIndex(item => item.difficulty===difficulty);
-  
-    
+    const findSizeIndex = GAME_SIZE.findIndex((item) => item.size === gridSize);
+    const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.difficulty === difficulty);
+
     const newWinner: typeWinner = {
       id: uuidv4(),
       name: winnerName,
@@ -139,6 +141,13 @@ const Minesweeper = () => {
     setWinners([...copyWinners, newWinner]);
     setWinnerName('');
     setTimer(0);
+    toast('Result Added!', {
+      position: 'top-left',
+      autoClose: 3000,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   };
 
   return (
@@ -184,6 +193,7 @@ const Minesweeper = () => {
                   />
                 ))
               )}
+              {isFirstMoveDone && <Restart handleRestart={() => handleRestart()} />}
               {isGameOver && <GameOver />}
               {isWinner && (
                 <Winner
@@ -196,6 +206,7 @@ const Minesweeper = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

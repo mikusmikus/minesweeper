@@ -1,13 +1,11 @@
 $greyLight: rgb(209, 209, 209);
 $greyDark: rgb(168, 168, 168);
-$red : rgb(236, 75, 0);
+$red: rgb(236, 75, 0);
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 $fontSize50: 50px;
 $fontSize24: 24px;
-
 // $FontFamily: 'Goldman', cursive;
-
-.results{
+.results {
     position: relative;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -24,25 +22,28 @@ $fontSize24: 24px;
     letter-spacing: 1px;
     font-size: $fontSize24;
 }
+
 .active {
     height: 600px;
-
 }
-.table{
+
+.table {
     padding: 20px;
     max-height: 300px;
     overflow: auto;
 }
-.tableTh{
-    background-color: $red;
 
+.tableTh {
+    background-color: $red;
     color: black;
 }
-.tableTr{
-   text-align: center;
+
+.tableTr {
+    text-align: center;
     background-color: $greyDark;
 }
-.heading{
+
+.heading {
     font-size: $fontSize50;
     margin: 0;
     padding-top: 50px;

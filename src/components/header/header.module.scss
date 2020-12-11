@@ -51,10 +51,19 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     width: 100%;
 }
 
+.triangleWrapper {
+    position: absolute;
+    width: 0;
+    height: 0;
+    background-color: black;
+    top: 100%;
+    left: 50%;
+}
+
 .triangle {
     position: absolute;
-    top: 100%;
-    left: 35.2%;
+    top: 0;
+    left: -120px;
     border-left: 120px solid transparent;
     border-right: 120px solid transparent;
     border-top: 50px solid $red;
@@ -80,16 +89,23 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     cursor: pointer;
     background-color: transparent;
     text-align: center;
-    padding: 0px 0px 10px 0px;
+    padding-bottom: 10px;
     font-family: $FontFamily;
     &:hover {
         opacity: 0.8;
     }
 }
 
+.timerWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
 .timer {
     font-size: $fontSize36;
     font-weight: 700;
+    max-width: 237px;
     background-color: $greyLight;
     color: $red;
     display: flex;
@@ -98,4 +114,3 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     width: 240px;
     justify-content: center;
 }
-
