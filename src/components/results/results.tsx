@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import style from './results.module.scss';
+import { timeConvertor } from '../../helpers/helperFunctions';
 import type { typeWinner } from '../../helpers/types';
+
 
 type Props = {
   showResults: boolean;
@@ -17,7 +19,7 @@ const Results: FC<Props> = ({ showResults, winners }) => {
             <th>#</th>
             <th>name</th>
             <th>time</th>
-            <th>size</th>
+            <th>grid size</th>
             <th>difficulty</th>
           </tr>
         </thead>
@@ -26,7 +28,7 @@ const Results: FC<Props> = ({ showResults, winners }) => {
             <tr key={id} className={style.tableTr}>
               <td>{index + 1}</td>
               <td>{name.substring(0, 12)}</td>
-              <td>{time}</td>
+              <td>{timeConvertor(time)}</td>
               <td>{size}</td>
               <td>{difficulty}</td>
             </tr>

@@ -4,7 +4,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import 'flexboxgrid';
-import './styles/helpers.scss';
 
 
 ReactDOM.render(

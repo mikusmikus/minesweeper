@@ -2,15 +2,17 @@ import React, { FC } from 'react';
 import style from './header.module.scss';
 import Options from '../options/options';
 import type { GameSize, GameDifficulty } from '../../helpers/optionArrays';
+import { timeConvertor } from '../../helpers/helperFunctions';
 
 type Props = {
   isGameStarted: boolean;
-  firstMoveDone: boolean;
+  isFirstMoveDone: boolean;
   showResults: boolean;
   gameSize: number;
   gameDifficulty: number;
   gameSizeArr: GameSize[];
   gameDifficultyArr: GameDifficulty[];
+  timer: number;
   handleShowResults: () => void;
   handleStart: () => void;
   handleRestart: () => void;
@@ -19,13 +21,14 @@ type Props = {
 };
 
 const Header: FC<Props> = ({
-  firstMoveDone,
+  isFirstMoveDone,
   showResults,
   gameSizeArr,
   gameSize,
   gameDifficulty,
   isGameStarted,
   gameDifficultyArr,
+  timer,
   handleShowResults,
   handleStart,
   handleRestart,
@@ -37,7 +40,7 @@ const Header: FC<Props> = ({
       <div className={style.header}>
         {!isGameStarted ? (
           <>
-            <div className="col-xs-3">
+            <div className="col-xs-4">
               <div className={style.startFinish}>
                 <button
                   type="button"
@@ -49,7 +52,7 @@ const Header: FC<Props> = ({
                 </button>
               </div>
             </div>
-            <div className="col-xs-9">
+            <div className="col-xs-8">
               <Options
                 gameSize={gameSize}
                 gameDifficulty={gameDifficulty}
@@ -67,13 +70,15 @@ const Header: FC<Props> = ({
           </>
         ) : (
           <>
-            <div className="col-xs-3">
+            <div className="col-xs-4">
               <button type="button" onClick={handleStart} className={style.button}>
                 END
               </button>
             </div>
-            <div className="col-xs-6">count / time</div>
-            {firstMoveDone && (
+            <div className="col-xs-4 col-xs-offset-4">
+              {timer > 0 && <span className={style.timer}>{timeConvertor(timer)}</span>}
+            </div>
+            {isFirstMoveDone && (
               <span className={style.triangle}>
                 <button type="button" onClick={handleRestart} className={style.triangleButton}>
                   restart

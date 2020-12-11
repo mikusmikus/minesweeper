@@ -1,12 +1,11 @@
 $greyLight: rgb(197, 197, 197);
 $greyDark: rgb(168, 168, 168);
-$red : rgb(236, 75, 0);
+$red: rgb(236, 75, 0);
 $FontFamily: 'Goldman', cursive;
 $fontSize16: 16px;
 $fontSize24: 24px;
 $fontSize36: 36px;
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
-
 .header {
     position: relative;
     margin: 0 auto;
@@ -27,11 +26,13 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     width: 100%;
     padding: 5px 8px;
     font-family: $FontFamily;
-    background-color: $red ;
+    background-color: $red;
     font-size: $fontSize36;
     text-shadow: $TextShadow;
+    text-transform: uppercase;
     border: none;
     outline: none;
+    font-weight: 700;
     cursor: pointer;
     &:hover {
         opacity: 0.8;
@@ -61,7 +62,7 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     background-color: transparent;
     transition: all 0.2s;
     &:hover {
-     opacity: 0.8;
+        opacity: 0.8;
     }
 }
 
@@ -85,3 +86,16 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
         opacity: 0.8;
     }
 }
+
+.timer {
+    font-size: $fontSize36;
+    font-weight: 700;
+    background-color: $greyLight;
+    color: $red;
+    display: flex;
+    padding: 5px 8px;
+    width: 100%;
+    width: 240px;
+    justify-content: center;
+}
+

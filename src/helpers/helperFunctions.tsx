@@ -107,12 +107,22 @@ export const drawGameOver = (size: number, grid: Grid[][]): Grid[][] => {
 };
 
 export const checkWinner = (size: number, grid: Grid[][]): boolean => {
-  
   return !grid.some((array) =>
     array.some((item) => {
-      return (item.cell !== 'bomb' && !item.isOpen);
+      return item.cell !== 'bomb' && !item.isOpen;
     })
   );
+};
 
-
+export const timeConvertor = (time: number): string => {
+  const minutes: number = Math.floor(time / 60);
+  const seconds: number = time - minutes * 60;
+  let converted = '';
+  if (minutes > 0) {
+    converted += `${minutes}m:${seconds < 10 ? '0' : ''}`;
+    converted += `${seconds}s`;
+  } else {
+    converted += `${seconds}s`;
+  }
+  return converted;
 };

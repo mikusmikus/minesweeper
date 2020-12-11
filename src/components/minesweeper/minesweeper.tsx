@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { cloneDeep, round } from 'lodash';
@@ -24,7 +25,8 @@ import style from './minesweeper.module.scss';
 let isGameStarted = false;
 let isGameOver = false;
 let isWinner = false;
-let firstMoveDone = false;
+let isFirstMoveDone = false;
+let isTimerStarted = false; 
 let isGridDisabled = false;
 
 const Minesweeper = () => {
@@ -34,12 +36,23 @@ const Minesweeper = () => {
   const [showResults, setShowResults] = useState(false);
   const [winnerName, setWinnerName] = useState('');
   const [winners, setWinners] = useState<typeWinner[]>([]);
+  const [startTimer, setStartTimer] = useState(false);
+  const [timer, setTimer] = useState(0);
 
   useEffect(() => {
     const minesweeperStorage = localStorage.getItem('minesweeper');
     minesweeperStorage && setWinners(JSON.parse(minesweeperStorage));
   }, []);
 
+  useEffect(() => {
+    const myInterval = setInterval(() => {
+      if (isTimerStarted) {
+        setTimer((oldTimer) => oldTimer + 1);
+      } else {
+        clearInterval(myInterval);
+      }
+    }, 1000);
+  }, [startTimer]);
 
   const handleOpen = (rowI: number, colI: number) => {
     const copyGrid = cloneDeep(grid);
@@ -52,21 +65,25 @@ const Minesweeper = () => {
       const gameOverGrid = drawGameOver(gridSize, copyGrid);
       isGameOver = true;
       isGridDisabled = true;
+      isTimerStarted = false;
       setGrid(gameOverGrid);
       return;
     }
-    if (!firstMoveDone) {
+    if (!isFirstMoveDone) {
       const BOMB_COUNT = round(gridSize / difficulty);
       const gridWithBombs = drawBombs(cell, BOMB_COUNT, copyGrid);
       const gridEmtptyFirst = drawAroundFirstClicked(cell, gridSize, gridWithBombs);
       const gridWithNumber = drawNumbers(gridSize, gridEmtptyFirst);
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, gridWithNumber);
+      setStartTimer(!startTimer);
       setGrid(gridAdjacent);
-      firstMoveDone = true;
+      isFirstMoveDone = true;
+      isTimerStarted = true;
     } else {
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, copyGrid);
       gridAdjacent[rowI][colI].isOpen = true;
       if (checkWinner(gridSize, gridAdjacent)) {
+        isTimerStarted = false;
         isWinner = true;
       }
       setGrid(gridAdjacent);
@@ -87,27 +104,33 @@ const Minesweeper = () => {
     const copyGrid = drawGrid(gridSize);
     setGrid(copyGrid);
     isGameStarted = !isGameStarted;
-    firstMoveDone = false;
+    isFirstMoveDone = false;
     isGameOver = false;
     isGridDisabled = false;
     isWinner = false;
+    setTimer(0);
   };
   const handleRestart = () => {
     const copyGrid = drawGrid(gridSize);
     setGrid(copyGrid);
-    firstMoveDone = false;
+    isFirstMoveDone = false;
     isGameOver = false;
     isGridDisabled = false;
     isWinner = false;
+    setTimer(0);
   };
   const handleWinner = () => {
     const copyWinners = [...winners];
-    const newWinner:typeWinner = {
+    const findSizeIndex = GAME_SIZE.findIndex(item => item.size===gridSize);
+    const findDiffIndex = GAME_DIFICULTY.findIndex(item => item.difficulty===difficulty);
+  
+    
+    const newWinner: typeWinner = {
       id: uuidv4(),
       name: winnerName,
-      time: 23,
-      size: 'large',
-      difficulty: 'hard',
+      time: timer,
+      size: GAME_SIZE[findSizeIndex].name,
+      difficulty: GAME_DIFICULTY[findDiffIndex].name,
     };
 
     isWinner = false;
@@ -115,7 +138,7 @@ const Minesweeper = () => {
     localStorage.setItem('minesweeper', JSON.stringify([...copyWinners, newWinner]));
     setWinners([...copyWinners, newWinner]);
     setWinnerName('');
-
+    setTimer(0);
   };
 
   return (
@@ -124,12 +147,13 @@ const Minesweeper = () => {
         <div className="col-xs-12">
           <Header
             isGameStarted={isGameStarted}
-            firstMoveDone={firstMoveDone}
+            isFirstMoveDone={isFirstMoveDone}
             showResults={showResults}
             gameSizeArr={GAME_SIZE}
             gameDifficultyArr={GAME_DIFICULTY}
             gameSize={gridSize}
             gameDifficulty={difficulty}
+            timer={timer}
             handleStart={() => handleStart()}
             handleRestart={() => handleRestart()}
             handleShowResults={() => setShowResults(!showResults)}
