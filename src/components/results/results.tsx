@@ -9,8 +9,8 @@ type Props = {
 };
 
 const Results: FC<Props> = ({ showResults, winners }) => {
-  // uztaisīt filtrāciju winneriem.
-
+  winners.sort((a, b) => a.time - b.time).splice(10);
+  
   return (
     <div className={`${style.results} ${showResults && style.active}`}>
       <h5 className={style.heading}>Results</h5>

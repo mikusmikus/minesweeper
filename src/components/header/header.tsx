@@ -6,7 +6,6 @@ import { timeConvertor } from '../../helpers/helperFunctions';
 
 type Props = {
   isGameStarted: boolean;
-  isFirstMoveDone: boolean;
   showResults: boolean;
   gameSize: number;
   gameDifficulty: number;
@@ -15,13 +14,11 @@ type Props = {
   timer: number;
   handleShowResults: () => void;
   handleStart: () => void;
-  handleRestart: () => void;
   handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const Header: FC<Props> = ({
-  isFirstMoveDone,
   showResults,
   gameSizeArr,
   gameSize,
@@ -31,7 +28,6 @@ const Header: FC<Props> = ({
   timer,
   handleShowResults,
   handleStart,
-  handleRestart,
   handleGridSizeChange,
   handleDifficultyChange,
 }) => {
@@ -79,7 +75,7 @@ const Header: FC<Props> = ({
             </div>
             <div className="col-xs-6 col-xs-offset-2">
               <div className={style.timerWrapper}>
-                {timer > 0 && <span className={style.timer}>{timeConvertor(timer)}</span>}
+                <span className={style.timer}>{timer > 0 && timeConvertor(timer)}</span>
               </div>
             </div>
           </>

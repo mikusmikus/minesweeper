@@ -156,7 +156,6 @@ const Minesweeper = () => {
         <div className="col-xs-12">
           <Header
             isGameStarted={isGameStarted}
-            isFirstMoveDone={isFirstMoveDone}
             showResults={showResults}
             gameSizeArr={GAME_SIZE}
             gameDifficultyArr={GAME_DIFICULTY}
@@ -164,7 +163,6 @@ const Minesweeper = () => {
             gameDifficulty={difficulty}
             timer={timer}
             handleStart={() => handleStart()}
-            handleRestart={() => handleRestart()}
             handleShowResults={() => setShowResults(!showResults)}
             handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
             handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}

@@ -105,6 +105,7 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 .timer {
     font-size: $fontSize36;
     font-weight: 700;
+    min-height: 53px;
     max-width: 237px;
     background-color: $greyLight;
     color: $red;
