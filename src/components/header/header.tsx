@@ -7,12 +7,13 @@ import Timer from '../timer/timer';
 
 type Props = {
   isGameStarted: boolean;
+  isTimerStarted: boolean;
+  isFirstMoveDone: boolean;
   showResults: boolean;
   gameSize: number;
   gameDifficulty: number;
   gameSizeArr: GameSize[];
   gameDifficultyArr: GameDifficulty[];
-  isTimerStarted: boolean;
   getTimerValue: (time: number) => void;
   handleShowResults: () => void;
   handleStart: () => void;
@@ -21,13 +22,14 @@ type Props = {
 };
 
 const Header: FC<Props> = ({
+  isGameStarted,
+  isTimerStarted,
+  isFirstMoveDone,
   showResults,
   gameSizeArr,
   gameSize,
   gameDifficulty,
-  isGameStarted,
   gameDifficultyArr,
-  isTimerStarted,
   getTimerValue,
   handleShowResults,
   handleStart,
@@ -77,7 +79,11 @@ const Header: FC<Props> = ({
               </button>
             </div>
             <div className="col-xs-6 col-xs-offset-2">
-              <Timer isTimerStarted={isTimerStarted} getTimerValue={getTimerValue} />
+              <Timer
+                isTimerStarted={isTimerStarted}
+                isFirstMoveDone={isFirstMoveDone}
+                getTimerValue={getTimerValue}
+              />
             </div>
           </>
         )}

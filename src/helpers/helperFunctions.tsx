@@ -119,10 +119,10 @@ export const timeConvertor = (time: number): string => {
   const seconds: number = time - minutes * 60;
   let converted = '';
   if (minutes > 0) {
-    converted += `${minutes}m:${seconds < 10 ? '0' : ''}`;
-    converted += `${seconds}s`;
+    converted += `${minutes}m ${seconds.toFixed(1)}s`;
+    // converted += `${seconds.toFixed(1)}s`;
   } else {
-    converted += `${seconds}s`;
+    converted += `${seconds.toFixed(1)}s`;
   }
   return converted;
 };

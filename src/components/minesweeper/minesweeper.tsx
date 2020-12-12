@@ -113,36 +113,35 @@ const Minesweeper = () => {
     setTimer(0);
   };
   const handleWinner = () => {
-    const copyWinners = [...winners];
-    const findSizeIndex = GAME_SIZE.findIndex((item) => item.size === gridSize);
-    const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.difficulty === difficulty);
+    if (!winnerName) {
+      alert('enter name!');
+    } else {
+      const copyWinners = [...winners];
+      const findSizeIndex = GAME_SIZE.findIndex((item) => item.size === gridSize);
+      const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.difficulty === difficulty);
 
-    const newWinner: typeWinner = {
-      id: uuidv4(),
-      name: winnerName,
-      time: timer,
-      size: GAME_SIZE[findSizeIndex].name,
-      difficulty: GAME_DIFICULTY[findDiffIndex].name,
-    };
+      const newWinner: typeWinner = {
+        id: uuidv4(),
+        name: winnerName,
+        time: timer,
+        size: GAME_SIZE[findSizeIndex].name,
+        difficulty: GAME_DIFICULTY[findDiffIndex].name,
+      };
 
-    isWinner = false;
-    isGameStarted = false;
-    localStorage.setItem('minesweeper', JSON.stringify([...copyWinners, newWinner]));
-    setWinners([...copyWinners, newWinner]);
-    setWinnerName('');
-    setTimer(0);
-    toast('Result Added!', {
-      position: 'top-left',
-      autoClose: 3000,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-  };
-
-  const getTimerValue = (time: number) => {
-    setTimer(time);
-    return time;
+      isWinner = false;
+      isGameStarted = false;
+      localStorage.setItem('minesweeper', JSON.stringify([...copyWinners, newWinner]));
+      setWinners([...copyWinners, newWinner]);
+      setWinnerName('');
+      setTimer(0);
+      toast('Result Added!', {
+        position: 'top-left',
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
   };
 
   return (
@@ -151,6 +150,8 @@ const Minesweeper = () => {
         <div className="col-xs-12">
           <Header
             isGameStarted={isGameStarted}
+            isTimerStarted={isTimerStarted}
+            isFirstMoveDone={isFirstMoveDone}
             showResults={showResults}
             gameSizeArr={GAME_SIZE}
             gameDifficultyArr={GAME_DIFICULTY}
@@ -160,8 +161,9 @@ const Minesweeper = () => {
             handleShowResults={() => setShowResults(!showResults)}
             handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
             handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}
-            isTimerStarted={isTimerStarted}
-            getTimerValue={getTimerValue}
+            getTimerValue={(time: number) => {
+              setTimer(time);
+            }}
           />
           <Results showResults={showResults} winners={winners} />
         </div>
