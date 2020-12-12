@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
 import style from './restart.module.scss';
+import type { typeRestart } from '../../helpers/types';
 
-type Props = {
-  handleRestart: () => void;
-};
-const Restart: FC<Props> = ({ handleRestart }) => {
+const Restart: FC<typeRestart> = ({ handleRestart }) => {
   return (
     <div className={style.triangleWrapper}>
       <span className={style.triangle}>

@@ -1,17 +1,8 @@
 import React, { FC } from 'react';
 import style from './options.module.scss';
-import type {GameSize, GameDifficulty} from '../../helpers/optionArrays';
+import type { typeOptions } from '../../helpers/types';
 
-type Props = {
-  gameSize: number;
-  gameDifficulty: number;
-  gameSizeArr: GameSize[]
-  gameDifficultyArr: GameDifficulty[]
-  handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-};
-
-const Options: FC<Props> = ({
+const Options: FC<typeOptions> = ({
   gameSize,
   gameDifficulty,
   gameSizeArr,

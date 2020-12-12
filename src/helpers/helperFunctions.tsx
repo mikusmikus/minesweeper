@@ -1,10 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-cycle */
 import { cloneDeep, random, sampleSize } from 'lodash';
-
-export type Cell = { rowI: number; colI: number };
-export type CellText = 'bomb' | 'empty' | number;
-export type Grid = { id: number; cell: CellText; isOpen: boolean; haveFlag: boolean };
+import type { Grid, Cell } from './types';
 
 export const drawGrid = (size: number) => {
   let gridArr: Grid[] = [];

@@ -1,22 +1,17 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
 import { timeConvertor } from '../../helpers/helperFunctions';
 import style from './timer.module.scss';
+import type { typeTimer } from '../../helpers/types';
 
-type Props = {
-  isTimerStarted: boolean;
-  isFirstMoveDone: boolean;
-  getTimerValue: (time: number) => void;
-};
-
-const Timer: FC<Props> = ({ isTimerStarted, isFirstMoveDone, getTimerValue }) => {
+const Timer: FC<typeTimer> = ({ isTimerStarted, resetTimer, getTimerValue }) => {
   const [timeCount, setTimeCount] = useState(0);
   const myInterval = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    if (isFirstMoveDone) {
+    if (resetTimer) {
       setTimeCount(0);
     }
-  }, [isFirstMoveDone]);
+  }, [resetTimer]);
 
   useEffect(() => {
     if (isTimerStarted) {

@@ -1,30 +1,13 @@
 import React, { FC } from 'react';
 import style from './header.module.scss';
 import Options from '../options/options';
-import type { GameSize, GameDifficulty } from '../../helpers/optionArrays';
-import { timeConvertor } from '../../helpers/helperFunctions';
 import Timer from '../timer/timer';
+import type { typeHeader } from '../../helpers/types';
 
-type Props = {
-  isGameStarted: boolean;
-  isTimerStarted: boolean;
-  isFirstMoveDone: boolean;
-  showResults: boolean;
-  gameSize: number;
-  gameDifficulty: number;
-  gameSizeArr: GameSize[];
-  gameDifficultyArr: GameDifficulty[];
-  getTimerValue: (time: number) => void;
-  handleShowResults: () => void;
-  handleStart: () => void;
-  handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-};
-
-const Header: FC<Props> = ({
+const Header: FC<typeHeader> = ({
   isGameStarted,
   isTimerStarted,
-  isFirstMoveDone,
+  resetTimer,
   showResults,
   gameSizeArr,
   gameSize,
@@ -81,7 +64,7 @@ const Header: FC<Props> = ({
             <div className="col-xs-6 col-xs-offset-2">
               <Timer
                 isTimerStarted={isTimerStarted}
-                isFirstMoveDone={isFirstMoveDone}
+                resetTimer={resetTimer}
                 getTimerValue={getTimerValue}
               />
             </div>

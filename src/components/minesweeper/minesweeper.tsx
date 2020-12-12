@@ -11,7 +11,7 @@ import GameOver from '../gameOver/gameOver';
 import Winner from '../winner/winner';
 import Restart from '../restart/restart';
 import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays';
-import type { typeWinner } from '../../helpers/types';
+import type { typeResultObj } from '../../helpers/types';
 
 import {
   drawBombs,
@@ -31,6 +31,7 @@ let isWinner = false;
 let isFirstMoveDone = false;
 let isTimerStarted = false;
 let isGridDisabled = false;
+let resetTimer = false;
 
 const Minesweeper = () => {
   const [gridSize, setGridSize] = useState(10);
@@ -38,12 +39,12 @@ const Minesweeper = () => {
   const [grid, setGrid] = useState(drawGrid(gridSize));
   const [showResults, setShowResults] = useState(false);
   const [winnerName, setWinnerName] = useState('');
-  const [winners, setWinners] = useState<typeWinner[]>([]);
+  const [results, setResults] = useState<typeResultObj[]>([]);
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
     const minesweeperStorage = localStorage.getItem('minesweeper');
-    minesweeperStorage && setWinners(JSON.parse(minesweeperStorage));
+    minesweeperStorage && setResults(JSON.parse(minesweeperStorage));
   }, []);
 
   const handleOpen = (rowI: number, colI: number) => {
@@ -68,6 +69,7 @@ const Minesweeper = () => {
       const gridWithNumber = drawNumbers(gridSize, gridEmtptyFirst);
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, gridWithNumber);
       isTimerStarted = true;
+      resetTimer = false;
       setGrid(gridAdjacent);
       isFirstMoveDone = true;
     } else {
@@ -100,6 +102,7 @@ const Minesweeper = () => {
     isGridDisabled = false;
     isWinner = false;
     isTimerStarted = false;
+    resetTimer = true;
     setTimer(0);
   };
   const handleRestart = () => {
@@ -110,17 +113,18 @@ const Minesweeper = () => {
     isGridDisabled = false;
     isWinner = false;
     isTimerStarted = false;
+    resetTimer = true;
     setTimer(0);
   };
   const handleWinner = () => {
     if (!winnerName) {
       alert('enter name!');
     } else {
-      const copyWinners = [...winners];
+      const copyResults = [...results];
       const findSizeIndex = GAME_SIZE.findIndex((item) => item.size === gridSize);
       const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.difficulty === difficulty);
 
-      const newWinner: typeWinner = {
+      const newWinner: typeResultObj = {
         id: uuidv4(),
         name: winnerName,
         time: timer,
@@ -130,15 +134,14 @@ const Minesweeper = () => {
 
       isWinner = false;
       isGameStarted = false;
-      localStorage.setItem('minesweeper', JSON.stringify([...copyWinners, newWinner]));
-      setWinners([...copyWinners, newWinner]);
+      localStorage.setItem('minesweeper', JSON.stringify([...copyResults, newWinner]));
+      setResults([...copyResults, newWinner]);
       setWinnerName('');
       setTimer(0);
       toast('Result Added!', {
         position: 'top-left',
         autoClose: 3000,
         closeOnClick: true,
-        pauseOnHover: true,
         draggable: true,
       });
     }
@@ -151,7 +154,7 @@ const Minesweeper = () => {
           <Header
             isGameStarted={isGameStarted}
             isTimerStarted={isTimerStarted}
-            isFirstMoveDone={isFirstMoveDone}
+            resetTimer={resetTimer}
             showResults={showResults}
             gameSizeArr={GAME_SIZE}
             gameDifficultyArr={GAME_DIFICULTY}
@@ -165,7 +168,7 @@ const Minesweeper = () => {
               setTimer(time);
             }}
           />
-          <Results showResults={showResults} winners={winners} />
+          <Results showResults={showResults} results={results} />
         </div>
       </div>
       <div className="row">

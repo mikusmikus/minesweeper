@@ -1,17 +1,16 @@
 /* eslint-disable max-len */
 import React, { FC } from 'react';
 import style from './oneCell.module.scss';
-import type { Grid } from '../../helpers/helperFunctions';
+import type { typeOneCell } from '../../helpers/types';
+import bomb from '../../images/bomb.png';
 
-type Props = {
-  oneCell: Grid;
-  hadleRightClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  handleOpen: () => void;
-  isGridDisabled: boolean;
-  gridSize: number;
-};
-
-const OneCell: FC<Props> = ({ oneCell, handleOpen, hadleRightClick, gridSize, isGridDisabled }) => {
+const OneCell: FC<typeOneCell> = ({
+  oneCell,
+  handleOpen,
+  hadleRightClick,
+  gridSize,
+  isGridDisabled,
+}) => {
   const { isOpen, haveFlag, cell } = oneCell;
 
   const cellStyle = {
@@ -25,13 +24,7 @@ const OneCell: FC<Props> = ({ oneCell, handleOpen, hadleRightClick, gridSize, is
         <div className={style.cellOpen} onContextMenu={(e) => e.preventDefault()} style={cellStyle}>
           <span className={style.cellOpenText}>
             {cell > 0 && cell}
-            {cell === 'bomb' && (
-              <img
-                className={style.image}
-                src="https://w7.pngwing.com/pngs/220/369/png-transparent-minesweeper-pro-classic-mine-sweeper-minesweeper-plus-likeminesweeper-bomb-game-computer-wallpaper-video-game.png"
-                alt="bomb"
-              />
-            )}
+            {cell === 'bomb' && <img className={style.image} src={bomb} alt="bomb" />}
           </span>
         </div>
       ) : (
@@ -44,7 +37,6 @@ const OneCell: FC<Props> = ({ oneCell, handleOpen, hadleRightClick, gridSize, is
           onContextMenu={(e) => hadleRightClick(e)}
         >
           {' '}
-          {/* {isOpen && cell > 0 && cell} */}
         </button>
       )}
     </>

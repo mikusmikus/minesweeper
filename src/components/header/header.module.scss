@@ -20,6 +20,7 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     background-color: $greyDark;
     padding: 2px 20px;
     z-index: 10;
+    min-width: 500px;
 }
 
 .button {
@@ -96,3 +97,7 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
         opacity: 0.8;
     }
 }
+
+@media only screen and (max-width: 515px) {
+    
+  }

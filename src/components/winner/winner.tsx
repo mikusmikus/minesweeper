@@ -1,13 +1,9 @@
 import React, { FC, useEffect, useRef } from 'react';
 import style from './winner.module.scss';
+import type { typeWinner } from '../../helpers/types';
 
-type Props = {
-  winnerName:string;
-  handleWinnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleWinner:() => void
-};
 
-const Winner: FC<Props> = ({ winnerName, handleWinnerName, handleWinner }) => {
+const Winner: FC<typeWinner> = ({ winnerName, handleWinnerName, handleWinner }) => {
   const inputEl = useRef(null);
 
   useEffect(() => {

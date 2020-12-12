@@ -1,16 +1,11 @@
 import React, { FC } from 'react';
 import style from './results.module.scss';
 import { timeConvertor } from '../../helpers/helperFunctions';
-import type { typeWinner } from '../../helpers/types';
+import type { typeResults } from '../../helpers/types';
 
-type Props = {
-  showResults: boolean;
-  winners: typeWinner[];
-};
+const Results: FC<typeResults> = ({ showResults, results }) => {
+  results.sort((a, b) => a.time - b.time).splice(10);
 
-const Results: FC<Props> = ({ showResults, winners }) => {
-  winners.sort((a, b) => a.time - b.time).splice(10);
-  
   return (
     <div className={`${style.results} ${showResults && style.active}`}>
       <h5 className={style.heading}>Results</h5>
@@ -25,7 +20,7 @@ const Results: FC<Props> = ({ showResults, winners }) => {
           </tr>
         </thead>
         <tbody>
-          {winners.map(({ id, name, time, size, difficulty }, index) => (
+          {results.map(({ id, name, time, size, difficulty }, index) => (
             <tr key={id} className={style.tableTr}>
               <td>{index + 1}</td>
               <td>{name.substring(0, 12)}</td>
