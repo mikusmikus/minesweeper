@@ -1,8 +1,10 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 import React, { FC } from 'react';
 import style from './oneCell.module.scss';
-import type { typeOneCell } from '../../helpers/types';
+import type { typeOneCell, CellText } from '../../helpers/types';
 import bomb from '../../images/bomb.png';
+
 
 const OneCell: FC<typeOneCell> = ({
   oneCell,
