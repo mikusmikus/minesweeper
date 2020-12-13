@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { GameSize, GameDifficulty } from './optionArrays';
+import type { GameSize, GameDifficulty } from '../optionArrays/optionArrays';
 
 export type Cell = { rowI: number; colI: number };
 export type CellText = 'bomb' | 'empty' | number;

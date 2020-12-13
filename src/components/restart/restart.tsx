@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import style from './restart.module.scss';
-import type { typeRestart } from '../../helpers/types';
+import type { typeRestart } from '../../helpers/types/types';
 
 const Restart: FC<typeRestart> = ({ handleRestart }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import style from './options.module.scss';
-import type { typeOptions } from '../../helpers/types';
+import type { typeOptions } from '../../helpers/types/types';
 
 const Options: FC<typeOptions> = ({
   gameSize,

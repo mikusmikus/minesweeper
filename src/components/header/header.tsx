@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import style from './header.module.scss';
 import Options from '../options/options';
 import Timer from '../timer/timer';
-import type { typeHeader } from '../../helpers/types';
+import type { typeHeader } from '../../helpers/types/types';
 
 const Header: FC<typeHeader> = ({
   isGameStarted,

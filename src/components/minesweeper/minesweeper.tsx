@@ -10,8 +10,8 @@ import Results from '../results/results';
 import GameOver from '../gameOver/gameOver';
 import Winner from '../winner/winner';
 import Restart from '../restart/restart';
-import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays';
-import type { typeResultObj } from '../../helpers/types';
+import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays/optionArrays';
+import type { typeResultObj } from '../../helpers/types/types';
 
 import {
   drawBombs,
@@ -21,7 +21,7 @@ import {
   adjacentCellsNoBombs,
   drawGameOver,
   checkWinner,
-} from '../../helpers/helperFunctions';
+} from '../../helpers/helperFunctions/helperFunctions';
 import 'react-toastify/dist/ReactToastify.css';
 import style from './minesweeper.module.scss';
 
@@ -75,7 +75,7 @@ const Minesweeper = () => {
     } else {
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, copyGrid);
       gridAdjacent[rowI][colI].isOpen = true;
-      if (checkWinner(gridSize, gridAdjacent)) {
+      if (checkWinner(gridAdjacent)) {
         isTimerStarted = false;
         isWinner = true;
       }

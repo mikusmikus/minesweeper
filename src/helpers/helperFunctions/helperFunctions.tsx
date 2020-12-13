@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
-/* eslint-disable import/no-cycle */
 import { cloneDeep, random, sampleSize } from 'lodash';
-import type { Grid, Cell } from './types';
+import type { Grid, Cell, CellText } from '../types/types';
 
 export const drawGrid = (size: number) => {
   let gridArr: Grid[] = [];
@@ -21,11 +22,15 @@ export const drawGrid = (size: number) => {
 export const drawBombs = (cell: Cell, bombCount: number, grid: Grid[][]): Grid[][] => {
   const gridCopy = cloneDeep(grid);
   gridCopy.forEach((arr) => {
-    const randomNumber = random(1, bombCount);
-    const randomCells = sampleSize(arr, randomNumber);
-    for (let i = 0; i < randomNumber; i++) {
-      randomCells[i].cell = 'bomb';
+    const bombCountEachRow = random(1, bombCount);
+    for (let i = 0; i < bombCountEachRow; i++) {
+      const randomIndex = random(arr.length - 1);
+      arr[randomIndex].cell = 'bomb';
     }
+    // const CellsWhereBomb = sampleSize(arr, bombCountEachRow);
+    // for (let i = 0; i < randomNumber; i++) {
+    //   randomCells[i].cell = 'bomb';
+    // }
   });
   gridCopy[cell.rowI][cell.colI].cell = 0;
   return gridCopy;
@@ -62,7 +67,7 @@ export const drawNumbers = (size: number, grid: Grid[][]): Grid[][] => {
   return gridCopy;
 };
 
-const countNumber = (cell: Cell, size: number, gridCopy: Grid[][]): number => {
+export const countNumber = (cell: Cell, size: number, gridCopy: Grid[][]): number => {
   const { rowI, colI } = cell;
   let count = 0;
   for (let i = Math.max(rowI - 1, 0); i <= Math.min(rowI + 1, size - 1); i++) {
@@ -103,7 +108,7 @@ export const drawGameOver = (size: number, grid: Grid[][]): Grid[][] => {
   return gridCopy;
 };
 
-export const checkWinner = (size: number, grid: Grid[][]): boolean => {
+export const checkWinner = (grid: Grid[][]): boolean => {
   return !grid.some((array) =>
     array.some((item) => {
       return item.cell !== 'bomb' && !item.isOpen;
@@ -117,9 +122,43 @@ export const timeConvertor = (time: number): string => {
   let converted = '';
   if (minutes > 0) {
     converted += `${minutes}m ${seconds.toFixed(1)}s`;
-    // converted += `${seconds.toFixed(1)}s`;
   } else {
     converted += `${seconds.toFixed(1)}s`;
   }
   return converted;
 };
+
+export const Color = (cell: CellText) => {
+  switch (cell) {
+    case 1:
+      return 'red';
+    case 2:
+      return 'blue';
+    case 3:
+      return 'green';
+    case 4:
+      return 'purple';
+    case 5:
+      return 'red';
+    case 6:
+      return 'yellow';
+    case 7:
+      return 'black';
+    case 8:
+      return 'grey';
+    default:
+      return '';
+  }
+};
+
+// export const findRandomObjects = (grid: Grid[][], randomNumber: number) => {
+//   const copyGrid = [...grid];
+//   copyGrid.forEach((arr) => {
+//     // const randomCells = sampleSize(arr, randomNumber);
+//     for (let i = 0; i < randomNumber; i++) {
+//       const index = random(arr.length - 1);
+//       arr[index].cell = 'bomb';
+//     }
+//   });
+//   return copyGrid;
+// };

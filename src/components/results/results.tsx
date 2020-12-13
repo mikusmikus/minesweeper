@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import style from './results.module.scss';
-import { timeConvertor } from '../../helpers/helperFunctions';
-import type { typeResults } from '../../helpers/types';
+import { timeConvertor } from '../../helpers/helperFunctions/helperFunctions';
+import type { typeResults } from '../../helpers/types/types';
 
 const Results: FC<typeResults> = ({ showResults, results }) => {
   results.sort((a, b) => a.time - b.time).splice(10);

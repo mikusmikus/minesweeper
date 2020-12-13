@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
 import style from './winner.module.scss';
-import type { typeWinner } from '../../helpers/types';
+import type { typeWinner } from '../../helpers/types/types';
 
 
 const Winner: FC<typeWinner> = ({ winnerName, handleWinnerName, handleWinner }) => {

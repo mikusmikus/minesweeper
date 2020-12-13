@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useRef } from 'react';
-import { timeConvertor } from '../../helpers/helperFunctions';
+import { timeConvertor } from '../../helpers/helperFunctions/helperFunctions';
 import style from './timer.module.scss';
-import type { typeTimer } from '../../helpers/types';
+import type { typeTimer } from '../../helpers/types/types';
 
 const Timer: FC<typeTimer> = ({ isTimerStarted, resetTimer, getTimerValue }) => {
   const [timeCount, setTimeCount] = useState(0);
