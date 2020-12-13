@@ -97,10 +97,3 @@ describe('drawNumbers function', () => {
     expect(result).toEqual(gridWithNumbers);
   });
 });
-
-// describe('drawBombs function', () => {
-//   it('return grid with random filled cells, with value - bomb', () => {
-//     const lodashRandomNumberSpy = jest.spyOn(_, 'random');
-//     const lodashSampleSizeSpy = jest.spyOn(_, 'sampleSize');
-//   });
-// });

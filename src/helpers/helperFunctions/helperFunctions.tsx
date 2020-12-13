@@ -151,14 +151,3 @@ export const Color = (cell: CellText) => {
   }
 };
 
-// export const findRandomObjects = (grid: Grid[][], randomNumber: number) => {
-//   const copyGrid = [...grid];
-//   copyGrid.forEach((arr) => {
-//     // const randomCells = sampleSize(arr, randomNumber);
-//     for (let i = 0; i < randomNumber; i++) {
-//       const index = random(arr.length - 1);
-//       arr[index].cell = 'bomb';
-//     }
-//   });
-//   return copyGrid;
-// };
