@@ -1,20 +1,15 @@
-export type GameSize = {
-  name: string;
-  size: number;
-};
-export type GameDifficulty = {
-  name: string;
-  difficulty: number;
-};
+import type { Option } from '../types/types';
 
-export const GAME_SIZE: GameSize[] = [
-  { name: ' small', size: 10 },
-  { name: 'medium', size: 15 },
-  { name: 'large', size: 20 },
+
+
+export const GAME_SIZE: Option[] = [
+  { optionName: ' small', optionValue: 10 },
+  { optionName: 'medium', optionValue: 15 },
+  { optionName: 'large', optionValue: 20 },
 ];
 
-export const GAME_DIFICULTY: GameDifficulty[] = [
-  { name: 'easy', difficulty: 10 },
-  { name: 'medium', difficulty: 3 },
-  { name: 'hard', difficulty: 2 },
+export const GAME_DIFICULTY: Option[] = [
+  { optionName: 'easy', optionValue: 10 },
+  { optionName: 'medium', optionValue: 3 },
+  { optionName: 'hard', optionValue: 2 },
 ];

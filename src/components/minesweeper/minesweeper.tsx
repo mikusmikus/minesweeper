@@ -33,7 +33,7 @@ let isTimerStarted = false;
 let isGridDisabled = false;
 let resetTimer = false;
 
-const Minesweeper = () => {
+export const Minesweeper = () => {
   const [gridSize, setGridSize] = useState(10);
   const [difficulty, setDifficulty] = useState(10);
   const [grid, setGrid] = useState(drawGrid(gridSize));
@@ -121,15 +121,15 @@ const Minesweeper = () => {
       alert('enter name!');
     } else {
       const copyResults = [...results];
-      const findSizeIndex = GAME_SIZE.findIndex((item) => item.size === gridSize);
-      const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.difficulty === difficulty);
+      const findSizeIndex = GAME_SIZE.findIndex((item) => item.optionValue === gridSize);
+      const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.optionValue === difficulty);
 
       const newWinner: typeResultObj = {
         id: uuidv4(),
         name: winnerName,
         time: timer,
-        size: GAME_SIZE[findSizeIndex].name,
-        difficulty: GAME_DIFICULTY[findDiffIndex].name,
+        size: GAME_SIZE[findSizeIndex].optionName,
+        difficulty: GAME_DIFICULTY[findDiffIndex].optionName,
       };
 
       isWinner = false;

@@ -1,6 +1,4 @@
 $greyLight: rgb(209, 209, 209);
-$greyDark: rgb(168, 168, 168);
-$red: rgb(236, 75, 0);
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 $fontSize50: 50px;
 $fontSize24: 24px;
@@ -25,22 +23,6 @@ $fontSize24: 24px;
 
 .active {
     height: 600px;
-}
-
-.table {
-    padding: 20px;
-    max-height: 300px;
-    overflow: auto;
-}
-
-.tableTh {
-    background-color: $red;
-    color: black;
-}
-
-.tableTr {
-    text-align: center;
-    background-color: $greyDark;
 }
 
 .heading {

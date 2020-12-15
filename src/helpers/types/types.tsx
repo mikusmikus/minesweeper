@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { GameSize, GameDifficulty } from '../optionArrays/optionArrays';
 
 export type Cell = { rowI: number; colI: number };
 export type CellText = 'bomb' | 'empty' | number;
 export type Grid = { id: number; cell: CellText; isOpen: boolean; haveFlag: boolean };
 
+export type Option = {
+  optionName: string;
+  optionValue: number;
+};
 
 export type typeResultObj = {
   id: string;
@@ -14,6 +17,35 @@ export type typeResultObj = {
   difficulty: string;
 };
 
+export type typeSelectOption = {
+  value: number;
+  name: string;
+  label: string;
+  optionArr: Option[];
+  classNameLabel?: string;
+  classNameSelect?: string;
+  classNameOption?: string;
+  onChangeHandler: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+export type TypeButton = {
+  handleClick: () => void;
+  className?: string;
+  disabled?: boolean;
+  label: string;
+};
+
+export type TypeInput = {
+  value: string;
+  placeholder?: string;
+  className?: string;
+  focus?: boolean;
+  handleInputName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type TypeTable = {
+  tableData: typeResultObj[];
+};
 
 export type typeHeader = {
   isGameStarted: boolean;
@@ -22,8 +54,8 @@ export type typeHeader = {
   showResults: boolean;
   gameSize: number;
   gameDifficulty: number;
-  gameSizeArr: GameSize[];
-  gameDifficultyArr: GameDifficulty[];
+  gameSizeArr: Option[];
+  gameDifficultyArr: Option[];
   getTimerValue: (time: number) => void;
   handleShowResults: () => void;
   handleStart: () => void;
@@ -42,8 +74,8 @@ export type typeOneCell = {
 export type typeOptions = {
   gameSize: number;
   gameDifficulty: number;
-  gameSizeArr: GameSize[]
-  gameDifficultyArr: GameDifficulty[]
+  gameSizeArr: Option[]
+  gameDifficultyArr: Option[]
   handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'flexboxgrid';
-import Minesweeper from './components/minesweeper/minesweeper';
+import { Minesweeper } from './components/minesweeper/minesweeper';
 
 const App = () => {
   return (

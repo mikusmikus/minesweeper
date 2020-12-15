@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import style from './header.module.scss';
 import Options from '../options/options';
 import Timer from '../timer/timer';
+import Button from '../../commonComponents/button/button';
 import type { typeHeader } from '../../helpers/types/types';
 
 const Header: FC<typeHeader> = ({
@@ -25,16 +26,12 @@ const Header: FC<typeHeader> = ({
         {!isGameStarted ? (
           <>
             <div className="col-xs-4">
-              <div className={style.startFinish}>
-                <button
-                  type="button"
-                  onClick={handleStart}
-                  className={style.button}
-                  disabled={showResults}
-                >
-                  Start
-                </button>
-              </div>
+              <Button
+                handleClick={handleStart}
+                className="button"
+                disabled={showResults}
+                label="START"
+              />
             </div>
             <div className="col-xs-8">
               <Options
@@ -48,18 +45,31 @@ const Header: FC<typeHeader> = ({
             </div>
             <div className={style.triangleWrapper}>
               <span className={style.triangle}>
-                <button type="button" onClick={handleShowResults} className={style.triangleButton}>
-                  {showResults ? 'close' : 'results'}
-                </button>
+                {showResults ? (
+                  <Button
+                    handleClick={handleShowResults}
+                    className="triangleButton"
+                    label="close"
+                  />
+                ) : (
+                  <Button
+                    handleClick={handleShowResults}
+                    className="triangleButton"
+                    label="results"
+                  />
+                )}
               </span>
             </div>
           </>
         ) : (
           <>
             <div className="col-xs-4">
-              <button type="button" onClick={handleStart} className={style.button}>
-                END
-              </button>
+              <Button
+                handleClick={handleStart}
+                className="button"
+                disabled={showResults}
+                label="END"
+              />
             </div>
             <div className="col-xs-6 col-xs-offset-2">
               <Timer

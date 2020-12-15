@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
-import { cloneDeep, random, sampleSize } from 'lodash';
+import { cloneDeep, random } from 'lodash';
 import type { Grid, Cell, CellText } from '../types/types';
 
 export const drawGrid = (size: number) => {
@@ -27,10 +27,6 @@ export const drawBombs = (cell: Cell, bombCount: number, grid: Grid[][]): Grid[]
       const randomIndex = random(arr.length - 1);
       arr[randomIndex].cell = 'bomb';
     }
-    // const CellsWhereBomb = sampleSize(arr, bombCountEachRow);
-    // for (let i = 0; i < randomNumber; i++) {
-    //   randomCells[i].cell = 'bomb';
-    // }
   });
   gridCopy[cell.rowI][cell.colI].cell = 0;
   return gridCopy;

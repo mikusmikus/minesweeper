@@ -1,35 +1,26 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC } from 'react';
 import style from './winner.module.scss';
 import type { typeWinner } from '../../helpers/types/types';
-
+import Input from '../../commonComponents/input/input';
+import Button from '../../commonComponents/button/button';
 
 const Winner: FC<typeWinner> = ({ winnerName, handleWinnerName, handleWinner }) => {
-  const inputEl = useRef(null);
-
-  useEffect(() => {
-    // @ts-ignore
-    inputEl.current.focus();
-  }, []);
-
   return (
     <div className={style.Winner}>
       <h1 className={style.heading}> Winner!!!</h1>
-      <label htmlFor="input" className={style.label}>
-        enter your name to save results
+      <div className={style.textAndInputWrapper}>
+        <p className={style.paragraph}>enter your name to save results</p>
         <div className={style.inputWrapper}>
-          <input
-            type="text"
+          <Input
             placeholder="enter name..."
-            className={style.input}
-            ref={inputEl}
             value={winnerName}
-            onChange={(e) => handleWinnerName(e)}
+            className="input"
+            handleInputName={(e) => handleWinnerName(e)}
+            focus
           />
-          <button type="button" className={style.button} onClick={handleWinner}>
-            save
-          </button>
+          <Button handleClick={handleWinner} className="buttonSave" label="save" />
         </div>
-      </label>
+      </div>
     </div>
   );
 };

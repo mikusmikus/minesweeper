@@ -1,0 +1,14 @@
+
+$fontSize24: 24px;
+$FontFamily: 'Goldman', cursive;
+
+.input {
+    padding: 2px 0 2px 10px;
+    width: 100%;
+    font-family: $FontFamily;
+    font-size: $fontSize24;
+    border: none;
+    border-radius: 2px;
+    overflow: hidden;
+    outline: 0;
+}

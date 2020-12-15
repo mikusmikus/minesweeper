@@ -9,12 +9,14 @@ import {
   drawGameOver,
   checkWinner,
   timeConvertor,
+  Color,
 } from './helperFunctions';
 import {
   drawnGrid,
   GridWithBombs,
   firstCellAroundEmptyGrid,
   gridWithNumbers,
+  adjacentCells,
 } from './arraysForTesting';
 
 describe('timerConverter function', () => {
@@ -27,6 +29,17 @@ describe('timerConverter function', () => {
     const time = 326;
     const result = timeConvertor(time);
     expect(result).toEqual('5m 26.0s');
+  });
+});
+
+describe('color function', () => {
+  it('return color name depends on cell value', () => {
+    const cellValue = 2;
+    const result = Color(cellValue);
+    expect(result).toEqual('blue');
+    const cellValue2 = 'bomb';
+    const result2 = Color(cellValue2);
+    expect(result2).toEqual('');
   });
 });
 
@@ -47,10 +60,11 @@ describe('drawBombs function', () => {
     const lodashRandomNumberSpy2 = jest.spyOn(_, 'random');
 
     for (let i = 0; i < size; i++) {
-      lodashRandomNumberSpy.mockReturnValueOnce(4);
-      for (let j = 0; j < 4; j++) {
-        lodashRandomNumberSpy2.mockReturnValueOnce(j);
-      }
+      lodashRandomNumberSpy.mockReturnValueOnce(3);
+
+      lodashRandomNumberSpy2.mockReturnValueOnce(1);
+      lodashRandomNumberSpy2.mockReturnValueOnce(3);
+      lodashRandomNumberSpy2.mockReturnValueOnce(4);
     }
     const result = drawBombs(cell, 4, grid);
     expect(result).toEqual(GridWithBombs);
@@ -71,10 +85,10 @@ describe('drawAroundFirstClicked function', () => {
       }
     }
     const gridBombs = drawBombs(cell, 4, grid);
-
     const result = drawAroundFirstClicked(cell, size, gridBombs);
     expect(result).toEqual(firstCellAroundEmptyGrid);
   });
+  
 });
 
 describe('drawNumbers function', () => {
@@ -95,5 +109,25 @@ describe('drawNumbers function', () => {
 
     const result = drawNumbers(size, firstClicked);
     expect(result).toEqual(gridWithNumbers);
+  });
+});
+describe('adjacentCellsNoBombs function', () => {
+  it('open all adjacentCell from clicked cell where cell value = 0', () => {
+    const size = 6;
+    const grid = drawGrid(size);
+    const cell = { rowI: 3, colI: 3 };
+    const lodashRandomNumberSpy = jest.spyOn(_, 'random');
+    const lodashRandomNumberSpy2 = jest.spyOn(_, 'random');
+    for (let i = 0; i < size; i++) {
+      lodashRandomNumberSpy.mockReturnValueOnce(4);
+      for (let j = 0; j < 4; j++) {
+        lodashRandomNumberSpy2.mockReturnValueOnce(j);
+      }
+    }
+    const gridBombs = drawBombs(cell, 4, grid);
+    const firstClicked = drawAroundFirstClicked(cell, size, gridBombs);
+    const drawNumber = drawNumbers(size, firstClicked);
+    const result = adjacentCellsNoBombs(cell, size, drawNumber);
+    expect(result).toEqual(adjacentCells);
   });
 });
