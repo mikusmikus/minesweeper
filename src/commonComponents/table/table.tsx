@@ -17,7 +17,7 @@ const Table: FC<TypeTable> = ({ tableData }) => {
       </thead>
       <tbody>
         {tableData.map(({ id, name, time, size, difficulty }, index) => (
-          <tr key={id} className={style.tableTr}>
+          <tr key={id} className={style.tableTr}> 
             <td>{index + 1}</td>
             <td>{name.substring(0, 12)}</td>
             <td>{timeConvertor(time)}</td>

@@ -4,9 +4,7 @@ import {
   drawBombs,
   drawAroundFirstClicked,
   drawNumbers,
-  countNumber,
   adjacentCellsNoBombs,
-  drawGameOver,
   checkWinner,
   timeConvertor,
   Color,
@@ -129,5 +127,28 @@ describe('adjacentCellsNoBombs function', () => {
     const drawNumber = drawNumbers(size, firstClicked);
     const result = adjacentCellsNoBombs(cell, size, drawNumber);
     expect(result).toEqual(adjacentCells);
+  });
+});
+
+describe('checkWinner function', () => {
+  it('checks if all not bomb cells are open and return true then', () => {
+    const size = 6;
+    const grid = drawGrid(size);
+    const cell = { rowI: 3, colI: 3 };
+    const lodashRandomNumberSpy = jest.spyOn(_, 'random');
+    const lodashRandomNumberSpy2 = jest.spyOn(_, 'random');
+    for (let i = 0; i < size; i++) {
+      lodashRandomNumberSpy.mockReturnValueOnce(4);
+      for (let j = 0; j < 4; j++) {
+        lodashRandomNumberSpy2.mockReturnValueOnce(j);
+      }
+    }
+    const gridBombs = drawBombs(cell, 4, grid);
+    const firstClicked = drawAroundFirstClicked(cell, size, gridBombs);
+    const drawNumber = drawNumbers(size, firstClicked);
+    const adjacent = adjacentCellsNoBombs(cell, size, drawNumber);
+    const result = checkWinner(adjacent);
+    expect(result).toEqual(true);
+    
   });
 });

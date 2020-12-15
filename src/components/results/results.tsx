@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import style from './results.module.scss';
 import Table from '../../commonComponents/table/table';
-// import { timeConvertor } from '../../helpers/helperFunctions/helperFunctions';
 import type { typeResults } from '../../helpers/types/types';
 
 const Results: FC<typeResults> = ({ showResults, results }) => {

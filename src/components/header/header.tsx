@@ -25,7 +25,7 @@ const Header: FC<typeHeader> = ({
       <div className={style.header}>
         {!isGameStarted ? (
           <>
-            <div className="col-xs-4">
+            <div className={style.buttonWrapper}>
               <Button
                 handleClick={handleStart}
                 className="button"
@@ -33,7 +33,7 @@ const Header: FC<typeHeader> = ({
                 label="START"
               />
             </div>
-            <div className="col-xs-8">
+            <div className={style.optionsWrapper}>
               <Options
                 gameSize={gameSize}
                 gameDifficulty={gameDifficulty}
@@ -63,7 +63,7 @@ const Header: FC<typeHeader> = ({
           </>
         ) : (
           <>
-            <div className="col-xs-4">
+            <div className={style.buttonWrapper}>
               <Button
                 handleClick={handleStart}
                 className="button"
@@ -71,7 +71,7 @@ const Header: FC<typeHeader> = ({
                 label="END"
               />
             </div>
-            <div className="col-xs-6 col-xs-offset-2">
+            <div className={style.timerWrapper}>
               <Timer
                 isTimerStarted={isTimerStarted}
                 resetTimer={resetTimer}

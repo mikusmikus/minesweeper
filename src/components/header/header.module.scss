@@ -22,31 +22,14 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     z-index: 10;
     min-width: 500px;
 }
-
-.button {
-    width: 100%;
-    padding: 5px 8px;
-    font-family: $FontFamily;
-    background-color: $red;
-    font-size: $fontSize36;
-    text-shadow: $TextShadow;
-    text-transform: uppercase;
-    border: none;
-    outline: none;
-    font-weight: 700;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.8;
-    }
-    &:disabled {
-        color: rgba(0, 0, 0, 0.5);
-        cursor: not-allowed;
-        &:hover {
-            opacity: 1;
-        }
-    }
+.buttonWrapper{
+    flex-basis: 33.33333333%;
+    max-width: 33.33333333%;
 }
-
+.optionsWrapper{
+    flex-basis: 66.666666%;
+    max-width:  66.666666%;
+}
 .triangleWrapper {
     position: absolute;
     width: 0;
@@ -72,27 +55,18 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     }
 }
 
-.triangleButton {
-    position: absolute;
-    text-transform: uppercase;
-    font-size: $fontSize24;
-    left: -64px;
-    top: -52px;
-    text-shadow: $TextShadow;
-    display: block;
-    min-width: 122px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: transparent;
-    text-align: center;
-    padding-bottom: 10px;
-    font-family: $FontFamily;
-    &:hover {
-        opacity: 0.8;
+@media only screen and (max-width: 530px) {
+    .header {
+        flex-wrap: wrap-reverse;
+        height: 200px;
+        justify-content: center;
     }
-}
-
-@media only screen and (max-width: 515px) {
-    
+    .buttonWrapper{
+        flex-basis: 100%;
+        max-width: 80%;
+    }
+    .optionsWrapper{
+        flex-basis: 100%;
+        max-width: 80%;
+    }
   }

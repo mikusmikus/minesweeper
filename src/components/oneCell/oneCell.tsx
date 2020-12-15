@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { FC } from 'react';
 import type { typeOneCell } from '../../helpers/types/types';
 import { Color } from '../../helpers/helperFunctions/helperFunctions';
