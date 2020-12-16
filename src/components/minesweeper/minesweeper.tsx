@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useEffect, useRef } from 'react';
 import { cloneDeep, round } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
@@ -106,24 +107,24 @@ export const Minesweeper = () => {
       return;
     }
     const copyResults = [...results];
+    copyResults.forEach((result) => {
+      result.newResult = false;
+    });
+
     const findSizeIndex = gameSizeArr.findIndex(
       (item) => item.optionValue === options.current.gridSize
     );
     const findDiffIndex = gameDifficultyArr.findIndex(
       (item) => item.optionValue === options.current.difficulty
     );
-
     const newWinner: typeResultObj = {
       id: uuidv4(),
       name: winnerName,
       time: timer,
       size: gameSizeArr[findSizeIndex].optionName,
       difficulty: gameDifficultyArr[findDiffIndex].optionName,
+      newResult: true,
     };
-    localStorage.setItem('minesweeper', JSON.stringify([...copyResults, newWinner]));
-    setResults([...copyResults, newWinner]);
-    setWinnerName('');
-    setTimer(0);
     toast.success('Result added!', {
       autoClose: 5000,
       style: {
@@ -134,7 +135,12 @@ export const Minesweeper = () => {
         minHeight: '100px',
       },
     });
+    localStorage.setItem('minesweeper', JSON.stringify([...copyResults, newWinner]));
+    setResults([...copyResults, newWinner]);
+    setWinnerName('');
+    setTimer(0);
     handleRestart();
+    setShowResults(true);
   };
 
   const saveOptionChanges = (size: number, diff: number) => {

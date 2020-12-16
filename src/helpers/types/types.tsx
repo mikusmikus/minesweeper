@@ -15,6 +15,7 @@ export type typeResultObj = {
   time: number;
   size: string;
   difficulty: string;
+  newResult: boolean; 
 };
 
 export type typeSelectOption = {
@@ -50,13 +51,9 @@ export type TypeTable = {
 export type typeHeader = {
   isTimerStarted: boolean;
   resetTimer: boolean;
-  // gameSize: number;
-  // gameDifficulty: number;
   getTimerValue: (time: number) => void;
   handleShowOptions: () => void;
   handleShowResults: () => void;
-  // handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  // handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export type typeOneCell = {

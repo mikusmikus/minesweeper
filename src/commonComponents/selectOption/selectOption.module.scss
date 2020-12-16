@@ -17,17 +17,17 @@ $color-deepChampagne : #f2cc8f;
     text-align: center;
 }
 .select {
-    padding: 3px 5px;
+    padding: 5px 15px;
     font-family: $FontFamily;
     background-color: $color-deepChampagne;
     font-size: $fontSize24;
     text-shadow: $TextShadow;
     text-transform: capitalize;
+    display: flex;
     width: 100%;
     border: none;
     outline: none;
     cursor: pointer;
-    text-align: center;
     transition: all 0.2s;
     &:hover {
         opacity: 0.8;

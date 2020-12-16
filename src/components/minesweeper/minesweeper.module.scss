@@ -26,7 +26,6 @@ $color-black: black;
     background-color: $color-independence;
     width: 100%;
     max-width: 400px;
-    min-width: 300px;
     display: flex;
     flex-wrap: wrap;
     border: none;
@@ -34,30 +33,3 @@ $color-black: black;
     box-sizing: content-box;
     border: 3px solid $color-independence
 }
-
-
-.toast-success-container {
-    color: #000 !important;
-    border-radius: 8px !important;
-    background: #FFFFFF !important;
-    border: 1px solid #34A853 !important;
-    box-shadow: 0px 1px 5px rgba(248, 175, 175, 0.1) !important;
-    background-color: red;
-  }
-  
-  .toast-success-container-after {
-    overflow: hidden;
-    position: relative;
-    background-color: #a83495;
-  }
-  
-  .toast-success-container-after::after{
-    top: 0;
-    left: 0;
-    content: '';
-    width: 7px;
-    height: 100%;
-    position: absolute;
-    display: inline-block;
-    background-color: #a83495;
-  }

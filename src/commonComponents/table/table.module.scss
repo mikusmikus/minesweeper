@@ -1,5 +1,6 @@
 $color-deepChampagne : #f2cc8f;
 $color-terraCota : #e07a5f;
+$color-greenSheen : #81b29a;
 
 .table {
     padding: 20px;
@@ -14,4 +15,8 @@ $color-terraCota : #e07a5f;
 .tableTr {
     text-align: center;
     background-color: $color-deepChampagne;
+}
+
+.newResult{
+    background-color: $color-greenSheen;
 }

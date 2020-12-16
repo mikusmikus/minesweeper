@@ -22,14 +22,16 @@ $color-terraCota : rgb(224, 122, 95);
     max-width: 300px;
     color: $color-terraCota;
     padding: 2px 5px;
+    margin-top: 20px;
     text-shadow: 0 0 3px rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
 .gameOverGG {
     font-size:150px;
     color: $color-terraCota;
-    padding-top: 20px;
+    margin-top: 0;
     font-weight: 700;
     margin: 0;
     margin-bottom: 30px;
@@ -38,18 +40,9 @@ $color-terraCota : rgb(224, 122, 95);
 }
 
 @keyframes gg {
-    0% {
-        color: $color-eggShell;
-        opacity: 0.5;
-    }
     50% {
         color: $color-terraCota;
-        transform: scale(2.5);
-        transform: translateY(200px);
+        transform: scale(1.2);
         opacity: 1;
-    }
-    100% {
-        color: $color-eggShell;
-        opacity: 0.5;
     }
 }
