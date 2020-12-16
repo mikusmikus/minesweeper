@@ -1,29 +1,30 @@
-$greyLight: rgb(209, 209, 209);
+$color-eggShell : rgba(244, 241, 222, 0.95);
+
+
+
 $fontSize50: 50px;
 $fontSize24: 24px;
 
-.results {
-    position: relative;
+.results{
+    position: absolute;
     margin: 0 auto;
-    margin-bottom: 20px;
-    max-width: 800px;
     width: 100%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $greyLight;
+    background-color: $color-eggShell ;
     z-index: 2;
     overflow: hidden;
     height: 0;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
     letter-spacing: 1px;
     font-size: $fontSize24;
 }
 
 .active {
-    height: 600px;
+   height: 100%;
 }
-
 .heading {
     font-size: $fontSize50;
     margin: 0;

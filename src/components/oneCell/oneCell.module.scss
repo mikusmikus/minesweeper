@@ -1,23 +1,19 @@
-* {
-    box-sizing: border-box;
-}
 
-$greyColor: rgb(197, 197, 197);
-$greyDarker: rgb(168, 168, 168);
 $white: rgb(255, 255, 255);
-$red: rgb(236, 75, 0);
 $fontSize24: 24px;
-$boxShadowInset: inset 0px 0px 0px 2px rgb(0, 0, 0);
+$color-terraCota: #e07a5f;
+$color-independence: #3d405b;
+$color-greenSheen: #81b29a;
+$boxShadowInset: inset 0px 0px 0px 2px $color-independence;
 
 .cellClose {
     position: relative;
     display: flex;
-    color: $greyColor;
     border: none;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    background-color: $greyDarker;
+    background-color: $color-greenSheen;
     outline: none;
     padding: 0;
     box-shadow: $boxShadowInset;
@@ -44,7 +40,7 @@ $boxShadowInset: inset 0px 0px 0px 2px rgb(0, 0, 0);
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    color: $red;
+    color: $color-terraCota;
     font-size: $fontSize24;
 }
 
@@ -57,7 +53,7 @@ $boxShadowInset: inset 0px 0px 0px 2px rgb(0, 0, 0);
 }
 
 .flag {
-    background-image: url('../../images/flag.png');
+    background-image: url('../../assets/images/flag.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

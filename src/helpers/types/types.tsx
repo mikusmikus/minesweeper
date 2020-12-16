@@ -48,19 +48,15 @@ export type TypeTable = {
 };
 
 export type typeHeader = {
-  isGameStarted: boolean;
   isTimerStarted: boolean;
   resetTimer: boolean;
-  showResults: boolean;
-  gameSize: number;
-  gameDifficulty: number;
-  gameSizeArr: Option[];
-  gameDifficultyArr: Option[];
+  // gameSize: number;
+  // gameDifficulty: number;
   getTimerValue: (time: number) => void;
+  handleShowOptions: () => void;
   handleShowResults: () => void;
-  handleStart: () => void;
-  handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  // handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  // handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export type typeOneCell = {
@@ -74,19 +70,20 @@ export type typeOneCell = {
 export type typeOptions = {
   gameSize: number;
   gameDifficulty: number;
-  gameSizeArr: Option[]
-  gameDifficultyArr: Option[]
-  handleGridSizeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleDifficultyChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  showOptions:boolean;
+  handleShowOptions: () => void;
+  saveOptionChanges: (gridSize:number, difficulty:number) => void;
 };
 
 export type typeRestart = {
   handleRestart: () => void;
+  isGameOver:boolean;
 };
 
 export type typeResults = {
   showResults: boolean;
   results: typeResultObj[];
+  handleShowResults: () => void;
 };
 
 export type typeTimer = {

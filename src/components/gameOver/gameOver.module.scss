@@ -1,7 +1,8 @@
-$white: white;
-$red: rgb(236, 75, 0);
+
 $fontSize16: 16px;
 $fontSize24: 24px;
+$color-eggShell : #f4f1de;
+$color-terraCota : rgb(224, 122, 95);
 
 .gameOver {
     position: absolute;
@@ -20,7 +21,7 @@ $fontSize24: 24px;
     font-weight: 700;
     width: 100%;
     max-width: 300px;
-    color: $red;
+    color: $color-terraCota;
     padding: 2px 5px;
     text-shadow: 0 0 3px rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.5);
@@ -28,29 +29,28 @@ $fontSize24: 24px;
 
 .gameOverGG {
     font-size:150px;
-    color: $red;
+    color: $color-terraCota;
     padding-top: 20px;
     font-weight: 700;
     margin: 0;
     margin-bottom: 30px;
     animation: gg 2s infinite;
     animation-iteration-count: 3;
-    // transform: scale(2.5);
 }
 
 @keyframes gg {
     0% {
-        color: $white;
+        color: $color-eggShell;
         opacity: 0.5;
     }
     50% {
-        color: $red;
+        color: $color-terraCota;
         transform: scale(2.5);
         transform: translateY(200px);
         opacity: 1;
     }
     100% {
-        color: $white;
+        color: $color-eggShell;
         opacity: 0.5;
     }
 }

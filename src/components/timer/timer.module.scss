@@ -1,23 +1,12 @@
-$greyLight: rgb(197, 197, 197);
-$red: rgb(236, 75, 0);
-$fontSize36: 36px;
+$fontSize32: 32px;
+$color-terraCota : rgb(224, 122, 95);
 
-.timerWrapper {
-    display: flex;
+.timer{
     width: 100%;
-    justify-content: flex-end;
-}
-
-.timer {
-    font-size: $fontSize36;
-    font-weight: 700;
-    min-height: 53px;
-    max-width: 237px;
-    background-color: $greyLight;
-    color: $red;
+    height: 100%;
     display: flex;
-    padding: 5px 8px;
-    width: 100%;
-    width: 240px;
+    align-items: center;
     justify-content: center;
+    font-size: 40px;
+    background-color: $color-terraCota;
 }

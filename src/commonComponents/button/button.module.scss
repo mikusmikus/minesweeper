@@ -1,88 +1,66 @@
-$greyLight: rgb(197, 197, 197);
-$greyDark: rgb(168, 168, 168);
-$red: rgb(236, 75, 0);
+
+$color-eggShell : #f4f1de;
+$color-independence : #3d405b;
+$color-greenSheen : #81b29a;
+$color-deepChampagne : #f2cc8f;
+$color-terraCota : rgb(224, 122, 95);
 $FontFamily: 'Goldman', cursive;
 $fontSize16: 16px;
 $fontSize24: 24px;
-$fontSize36: 36px;
+$fontSize36: 48px;
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 
 
-.button {
-    width: 100%;
+.optionResultButton{
+    width: 50%;
+    height: 50px;
     padding: 5px 8px;
-    font-family: $FontFamily;
-    background-color: $red;
-    font-size: $fontSize36;
-    text-shadow: $TextShadow;
-    text-transform: uppercase;
-    border: none;
-    outline: none;
-    font-weight: 700;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.8;
-    }
-    &:disabled {
-        color: rgba(0, 0, 0, 0.5);
-        cursor: not-allowed;
-        &:hover {
-            opacity: 1;
-        }
-    }
-}
-
-.triangleButton {
-    position: absolute;
-    text-transform: uppercase;
     font-size: $fontSize24;
-    left: -64px;
-    top: -52px;
-    text-shadow: $TextShadow;
-    display: block;
-    min-width: 122px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: transparent;
-    text-align: center;
-    padding-bottom: 10px;
+    background-color: $color-deepChampagne;
+    background: linear-gradient(180deg, $color-deepChampagne 0%, $color-terraCota 100%);
     font-family: $FontFamily;
+    outline: none;
+    border: none;
+    cursor: pointer;
     &:hover {
         opacity: 0.8;
     }
 }
 
+.cancelResultsOptions{
+    background: linear-gradient(180deg, $color-deepChampagne 0%, $color-terraCota 100%);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+}
 .restartButton {
-    position: absolute;
-    text-transform: uppercase;
-    font-size: $fontSize24;
-    left: -67px;
-    top: 13px;
-    text-shadow: $TextShadow;
-    display: block;
-    min-width: 122px;
-    border: none;
-    outline: none;
+    position: relative;
+    background: transparent;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    background-color: transparent;
-    text-align: center;
-    padding-top: 10px;
-    font-family: $FontFamily;
-    &:hover {
-        opacity: 0.8;
-    }
+    border:none;
+    outline: none;
 }
 
 
-.buttonSave {
+.saveButton {
     position: absolute;
     right: 0;
     top: 0;
     height: 100%;
     font-family: $FontFamily;
     font-size: $fontSize24;
-    background-color: $red;
+    background-color: $color-terraCota;
     outline: none;
     border: none;
     cursor: pointer;

@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { Minesweeper } from './components/minesweeper/minesweeper';
+import './styles/index.scss';
 import 'flexboxgrid';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Minesweeper />
   </React.StrictMode>,
   document.getElementById('root')
 );

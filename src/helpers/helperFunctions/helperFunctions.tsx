@@ -23,6 +23,7 @@ export const drawBombs = (cell: Cell, bombCount: number, grid: Grid[][]): Grid[]
   const gridCopy = cloneDeep(grid);
   gridCopy.forEach((arr) => {
     const bombCountEachRow = random(1, bombCount);
+
     for (let i = 0; i < bombCountEachRow; i++) {
       const randomIndex = random(arr.length - 1);
       arr[randomIndex].cell = 'bomb';
@@ -146,4 +147,3 @@ export const Color = (cell: CellText) => {
       return '';
   }
 };
-

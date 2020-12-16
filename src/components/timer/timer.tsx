@@ -18,17 +18,13 @@ const Timer: FC<typeTimer> = ({ isTimerStarted, resetTimer, getTimerValue }) => 
       myInterval.current = setInterval(() => {
         setTimeCount((oldTimeCount) => oldTimeCount + 0.1);
       }, 100);
-    } else {
-      clearInterval(myInterval.current!);
-      getTimerValue(timeCount);
+      return;
     }
+    clearInterval(myInterval.current!);
+    getTimerValue(timeCount);
   }, [isTimerStarted]);
 
-  return (
-    <div className={style.timerWrapper}>
-      <span className={style.timer}>{timeConvertor(timeCount)}</span>
-    </div>
-  );
+  return <div className={style.timer}>{timeConvertor(timeCount)}</div>;
 };
 
 export default Timer;

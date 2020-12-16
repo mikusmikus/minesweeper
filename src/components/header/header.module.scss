@@ -1,72 +1,29 @@
-$greyLight: rgb(197, 197, 197);
-$greyDark: rgb(168, 168, 168);
-$red: rgb(236, 75, 0);
+
 $FontFamily: 'Goldman', cursive;
 $fontSize16: 16px;
 $fontSize24: 24px;
 $fontSize36: 36px;
 $TextShadow: 0px 0px 1px rgb(255, 255, 255);
+$color-greenSheen: rgb(168, 168, 168);
+$red: rgb(236, 75, 0);
+
+$color-eggShell : #f4f1de;
+$color-greenSheen : #81b29a;
+$color-deepChampagne : #f2cc8f;
+$color-terraCota : #e07a5f;
+$color-independence : #3d405b;
+
 .header {
     position: relative;
-    margin: 0 auto;
     width: 100%;
-    max-width: 800px;
+    height: 140px;
     display: flex;
-    border: none;
-    height: 100px;
-    padding: 0;
+    flex-direction: column;
+    background-color: $color-terraCota;
+}
+.row{
+    display: flex;
+    height: 90px;
     align-items: center;
-    justify-content: space-between;
-    background-color: $greyDark;
-    padding: 2px 20px;
-    z-index: 10;
-    min-width: 500px;
+    justify-content: center;
 }
-.buttonWrapper{
-    flex-basis: 33.33333333%;
-    max-width: 33.33333333%;
-}
-.optionsWrapper{
-    flex-basis: 66.666666%;
-    max-width:  66.666666%;
-}
-.triangleWrapper {
-    position: absolute;
-    width: 0;
-    height: 0;
-    background-color: black;
-    top: 100%;
-    left: 50%;
-}
-
-.triangle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateX(-50%);
-    border-left: 120px solid transparent;
-    border-right: 120px solid transparent;
-    border-top: 50px solid $red;
-    padding: 0;
-    background-color: transparent;
-    transition: all 0.2s;
-    &:hover {
-        opacity: 0.8;
-    }
-}
-
-@media only screen and (max-width: 530px) {
-    .header {
-        flex-wrap: wrap-reverse;
-        height: 200px;
-        justify-content: center;
-    }
-    .buttonWrapper{
-        flex-basis: 100%;
-        max-width: 80%;
-    }
-    .optionsWrapper{
-        flex-basis: 100%;
-        max-width: 80%;
-    }
-  }

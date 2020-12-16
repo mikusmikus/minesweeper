@@ -1,5 +1,5 @@
-$greyDark: rgb(168, 168, 168);
-$red: rgb(236, 75, 0);
+$color-deepChampagne : #f2cc8f;
+$color-terraCota : #e07a5f;
 
 .table {
     padding: 20px;
@@ -8,11 +8,11 @@ $red: rgb(236, 75, 0);
 }
 
 .tableTh {
-    background-color: $red;
+    background-color: $color-terraCota;
     color: black;
 }
 
 .tableTr {
     text-align: center;
-    background-color: $greyDark;
+    background-color: $color-deepChampagne;
 }

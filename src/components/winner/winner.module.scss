@@ -1,8 +1,16 @@
-$greyLight: rgb(209, 209, 209);
-$greyDark: rgb(168, 168, 168);
-$red: rgb(236, 75, 0);
+$color-terraCota : #e07a5f;
+$color-eggShell : #f4f1de;
+$color-greenSheen : #81b29a;
+
+
+
 $fontSize24: 24px;
 $FontFamily: 'Goldman', cursive;
+
+$color-independence : #3d405b;
+$color-deepChampagne : #f2cc8f;
+
+
 
 .Winner {
     position: absolute;
@@ -20,29 +28,29 @@ $FontFamily: 'Goldman', cursive;
 
 .heading{
     font-size: 55px;
-    color: $red;
+    color: $color-terraCota;
     animation: winner 2s infinite;
     animation-iteration-count: 3;
 }
 
 @keyframes winner {
     0% {
-        color: $greyLight;
+        color: $color-eggShell;
         opacity: 0.5;
     }
     50% {
-        color: $red;
-        transform: scale(3);
+        color: $color-terraCota;
+        transform: scale(2);
         opacity: 1;
     }
     100% {
-        color: $greyLight;
+        color: $color-eggShell;
         opacity: 0.5;
     }
 }
 .textAndInputWrapper{
 
-    background-color: $greyDark; 
+    background-color: $color-deepChampagne; 
     text-align: center;
     text-shadow: 0 0 2px white;
     display: flex;

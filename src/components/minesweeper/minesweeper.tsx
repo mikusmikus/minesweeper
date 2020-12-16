@@ -10,7 +10,7 @@ import Results from '../results/results';
 import GameOver from '../gameOver/gameOver';
 import Winner from '../winner/winner';
 import Restart from '../restart/restart';
-import { GAME_SIZE, GAME_DIFICULTY } from '../../helpers/optionArrays/optionArrays';
+import { Options, gameSizeArr, gameDifficultyArr } from '../options/options';
 import type { typeResultObj } from '../../helpers/types/types';
 
 import {
@@ -25,19 +25,19 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 import style from './minesweeper.module.scss';
 
-let isGameStarted = false;
 let isGameOver = false;
 let isWinner = false;
 let isFirstMoveDone = false;
 let isTimerStarted = false;
 let isGridDisabled = false;
 let resetTimer = false;
+let gridSize = 10;
+let difficulty = 10;
 
 export const Minesweeper = () => {
-  const [gridSize, setGridSize] = useState(10);
-  const [difficulty, setDifficulty] = useState(10);
   const [grid, setGrid] = useState(drawGrid(gridSize));
   const [showResults, setShowResults] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
   const [winnerName, setWinnerName] = useState('');
   const [results, setResults] = useState<typeResultObj[]>([]);
   const [timer, setTimer] = useState(0);
@@ -63,12 +63,13 @@ export const Minesweeper = () => {
       return;
     }
     if (!isFirstMoveDone) {
-      const BOMB_COUNT = round(gridSize / difficulty);
-      const gridWithBombs = drawBombs(cell, BOMB_COUNT, copyGrid);
+      const bombCount = round(gridSize / difficulty);
+      const gridWithBombs = drawBombs(cell, bombCount, copyGrid);
       const gridEmtptyFirst = drawAroundFirstClicked(cell, gridSize, gridWithBombs);
       const gridWithNumber = drawNumbers(gridSize, gridEmtptyFirst);
       const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, gridWithNumber);
       isTimerStarted = true;
+      // isGameStarted = true;
       resetTimer = false;
       setGrid(gridAdjacent);
       isFirstMoveDone = true;
@@ -93,18 +94,6 @@ export const Minesweeper = () => {
     setGrid(copyGrid);
   };
 
-  const handleStart = () => {
-    const copyGrid = drawGrid(gridSize);
-    setGrid(copyGrid);
-    isGameStarted = !isGameStarted;
-    isFirstMoveDone = false;
-    isGameOver = false;
-    isGridDisabled = false;
-    isWinner = false;
-    isTimerStarted = false;
-    resetTimer = true;
-    setTimer(0);
-  };
   const handleRestart = () => {
     const copyGrid = drawGrid(gridSize);
     setGrid(copyGrid);
@@ -119,65 +108,80 @@ export const Minesweeper = () => {
   const handleWinner = () => {
     if (!winnerName) {
       alert('enter name!');
-    } else {
-      const copyResults = [...results];
-      const findSizeIndex = GAME_SIZE.findIndex((item) => item.optionValue === gridSize);
-      const findDiffIndex = GAME_DIFICULTY.findIndex((item) => item.optionValue === difficulty);
-
-      const newWinner: typeResultObj = {
-        id: uuidv4(),
-        name: winnerName,
-        time: timer,
-        size: GAME_SIZE[findSizeIndex].optionName,
-        difficulty: GAME_DIFICULTY[findDiffIndex].optionName,
-      };
-
-      isWinner = false;
-      isGameStarted = false;
-      localStorage.setItem('minesweeper', JSON.stringify([...copyResults, newWinner]));
-      setResults([...copyResults, newWinner]);
-      setWinnerName('');
-      setTimer(0);
-      toast('Result Added!', {
-        position: 'top-left',
-        autoClose: 3000,
-        closeOnClick: true,
-        draggable: true,
-      });
+      return;
     }
+    const copyResults = [...results];
+    const findSizeIndex = gameSizeArr.findIndex((item) => item.optionValue === gridSize);
+    const findDiffIndex = gameDifficultyArr.findIndex((item) => item.optionValue === difficulty);
+
+    const newWinner: typeResultObj = {
+      id: uuidv4(),
+      name: winnerName,
+      time: timer,
+      size: gameSizeArr[findSizeIndex].optionName,
+      difficulty: gameDifficultyArr[findDiffIndex].optionName,
+    };
+
+    isWinner = false;
+    // isGameStarted = false;
+    localStorage.setItem('minesweeper', JSON.stringify([...copyResults, newWinner]));
+    setResults([...copyResults, newWinner]);
+    setWinnerName('');
+    setTimer(0);
+    toast('Result Added!', {
+      position: 'top-right',
+      autoClose: 3000,
+      closeOnClick: true,
+      draggable: true,
+    });
+  };
+
+  const saveOptionChanges = (size: number, diff: number) => {
+    gridSize = size;
+    difficulty = diff;
+    isTimerStarted = false;
+    resetTimer = true;
+    isFirstMoveDone = false;
+    isGridDisabled = false;
+    setShowOptions(false);
+    setGrid(drawGrid(size));
   };
 
   return (
     <div className="conatainer">
-      <div className="row">
-        <div className="col-xs-12">
-          <Header
-            isGameStarted={isGameStarted}
-            isTimerStarted={isTimerStarted}
-            resetTimer={resetTimer}
-            showResults={showResults}
-            gameSizeArr={GAME_SIZE}
-            gameDifficultyArr={GAME_DIFICULTY}
-            gameSize={gridSize}
-            gameDifficulty={difficulty}
-            handleStart={() => handleStart()}
-            handleShowResults={() => setShowResults(!showResults)}
-            handleGridSizeChange={(e) => setGridSize(parseInt(e.target.value, 10))}
-            handleDifficultyChange={(e) => setDifficulty(parseInt(e.target.value, 10))}
-            getTimerValue={(time: number) => {
-              setTimer(time);
-            }}
-          />
-          <Results showResults={showResults} results={results} />
+      <div className={style.minesweeper}>
+        <div className="row">
+          <div className="col-xs-12">
+            <Header
+              isTimerStarted={isTimerStarted}
+              resetTimer={resetTimer}
+              handleShowOptions={() => setShowOptions(!showOptions)}
+              handleShowResults={() => setShowResults(!showResults)}
+              getTimerValue={(time: number) => {
+                setTimer(time);
+              }}
+            />
+            <Results
+              showResults={showResults}
+              results={results}
+              handleShowResults={() => setShowResults(false)}
+            />
+            <Options
+              gameSize={gridSize}
+              gameDifficulty={difficulty}
+              showOptions={showOptions}
+              handleShowOptions={() => setShowOptions(false)}
+              saveOptionChanges={saveOptionChanges}
+            />
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-xs-12">
-          {isGameStarted && (
+
+        <div className="row">
+          <div className="col-xs-12">
             <div
-              className={style.minesweeper}
+              className={style.grid}
               style={{
-                maxWidth: `${gridSize * 30}px`,
+                maxWidth: `${gridSize * 25}px`,
               }}
             >
               {grid.map((RowArr, rowI) =>
@@ -192,7 +196,9 @@ export const Minesweeper = () => {
                   />
                 ))
               )}
-              {isFirstMoveDone && <Restart handleRestart={() => handleRestart()} />}
+
+              <Restart handleRestart={() => handleRestart()} isGameOver={isGameOver} />
+
               {isGameOver && <GameOver />}
               {isWinner && (
                 <Winner
@@ -202,7 +208,7 @@ export const Minesweeper = () => {
                 />
               )}
             </div>
-          )}
+          </div>
         </div>
       </div>
       <ToastContainer />
