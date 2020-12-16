@@ -1,29 +1,22 @@
 
-$FontFamily: 'Goldman', cursive;
-$fontSize16: 16px;
-$fontSize24: 24px;
-$fontSize36: 36px;
-$TextShadow: 0px 0px 1px rgb(255, 255, 255);
-$color-greenSheen: rgb(168, 168, 168);
-$red: rgb(236, 75, 0);
-
-$color-eggShell : #f4f1de;
-$color-greenSheen : #81b29a;
-$color-deepChampagne : #f2cc8f;
 $color-terraCota : #e07a5f;
-$color-independence : #3d405b;
+$color-independence: #3d405b;
+$color-deepChampagne: #f2cc8f;
 
 .header {
     position: relative;
     width: 100%;
-    height: 140px;
-    display: flex;
-    flex-direction: column;
+    height: 120px;
     background-color: $color-terraCota;
+    border-bottom: 10px solid $color-independence;
+    box-sizing: content-box;
 }
-.row{
-    display: flex;
-    height: 90px;
-    align-items: center;
-    justify-content: center;
+
+.title{
+    padding: 11px 0;
+    margin: 0;
+    letter-spacing: 5px;
+    font-size: 40px;
+    text-align: center;
+    background: linear-gradient(180deg,  $color-deepChampagne 0%, $color-terraCota 100%);
 }

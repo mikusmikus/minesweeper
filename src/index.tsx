@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { Minesweeper } from './components/minesweeper/minesweeper';
 import './styles/index.scss';
-import 'flexboxgrid';
+// import 'flexboxgrid';
 
 
 ReactDOM.render(

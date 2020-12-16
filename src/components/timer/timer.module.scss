@@ -1,12 +1,15 @@
 $fontSize32: 32px;
-$color-terraCota : rgb(224, 122, 95);
+$color-terraCota : #e07a5f;
+$color-deepChampagne: #f2cc8f;
+
 
 .timer{
     width: 100%;
     height: 100%;
+    max-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 40px;
-    background-color: $color-terraCota;
+    background: linear-gradient(90deg,  $color-terraCota 0%, $color-deepChampagne 50%, $color-terraCota 100%);
 }

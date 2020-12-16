@@ -51,7 +51,7 @@ export const Options: FC<typeOptions> = ({ showOptions, handleShowOptions, saveO
         className={style.saveButton}
       >
         {' '}
-        save
+        Save
       </button>
     </div>
   );

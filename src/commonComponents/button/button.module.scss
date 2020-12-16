@@ -12,11 +12,11 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 
 
 .optionResultButton{
-    width: 50%;
+    width: 100%;
     height: 50px;
     padding: 5px 8px;
     font-size: $fontSize24;
-    background-color: $color-deepChampagne;
+color:$color-independence;
     background: linear-gradient(180deg, $color-deepChampagne 0%, $color-terraCota 100%);
     font-family: $FontFamily;
     outline: none;
@@ -28,7 +28,6 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
 }
 
 .cancelResultsOptions{
-    background: linear-gradient(180deg, $color-deepChampagne 0%, $color-terraCota 100%);
     position: absolute;
     right: 0;
     top: 0;
@@ -37,6 +36,8 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     outline: none;
     border: none;
     font-size: 40px;
+    color:$color-independence;
+    background: linear-gradient(180deg, $color-deepChampagne 0%, $color-terraCota 100%);
     cursor: pointer;
     &:hover {
         opacity: 0.8;
@@ -52,7 +53,6 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     outline: none;
 }
 
-
 .saveButton {
     position: absolute;
     right: 0;
@@ -60,6 +60,7 @@ $TextShadow: 0px 0px 1px rgb(255, 255, 255);
     height: 100%;
     font-family: $FontFamily;
     font-size: $fontSize24;
+    color:$color-independence;
     background-color: $color-terraCota;
     outline: none;
     border: none;

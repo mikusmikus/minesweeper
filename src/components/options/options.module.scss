@@ -1,9 +1,9 @@
 $color-eggShell: rgba(244, 241, 222, 0.95);
-$fontSize24: 24px;
 $color-deepChampagne: #f2cc8f;
 $color-terraCota: rgb(224, 122, 95);
 $FontFamily: 'Goldman', cursive;
 $fontSize24: 24px;
+
 .options {
     position: absolute;
     margin: 0 auto;
@@ -24,14 +24,13 @@ $fontSize24: 24px;
 
 .active {
     height: 100%;
-    height: 660px;
+    max-height: 700px;
+    padding-bottom: 100px;
 }
-
 .saveButton {
     margin-top: 25px;
     padding: 8px 15px;
     font-size: $fontSize24;
-    background-color: $color-deepChampagne;
     background: linear-gradient(180deg, $color-deepChampagne 0%, $color-terraCota 100%);
     font-family: $FontFamily;
     outline: none;

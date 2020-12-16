@@ -2,6 +2,9 @@ import React, { FC } from 'react';
 import style from './restart.module.scss';
 import type { typeRestart } from '../../helpers/types/types';
 import Button from '../../commonComponents/button/button';
+import sad from '../../assets/images/sad.png';
+import happy from '../../assets/images/happy.png';
+
 
 const Restart: FC<typeRestart> = ({ handleRestart, isGameOver }) => {
   return (
@@ -9,14 +12,14 @@ const Restart: FC<typeRestart> = ({ handleRestart, isGameOver }) => {
       <div className={style.restartButton}>
         {isGameOver ? (
           <img
-            src="https://cdn.shopify.com/s/files/1/1061/1924/products/Very_sad_emoji_icon_png_grande.png?v=1571606089"
-            alt="img"
+            src={sad}
+            alt="sad smile"
             className={style.image}
           />
         ) : (
           <img
-            src="https://esraa-alaarag.github.io/Minesweeper/images/smilyhappy.png"
-            alt="img"
+            src={happy}
+            alt="happy smile"
             className={style.image}
           />
         )}

@@ -5,43 +5,43 @@ import Button from '../../commonComponents/button/button';
 import type { typeHeader } from '../../helpers/types/types';
 
 const Header: FC<typeHeader> = ({
-  // isGameStarted,
   isTimerStarted,
   resetTimer,
-  // showResults,
   getTimerValue,
   handleShowOptions,
   handleShowResults,
-  // handleStart,
 }) => {
   return (
     <>
       <div className={style.header}>
-        <div className={style.row}>
-          <Button handleClick={handleShowOptions} className="optionResultButton" label="options" />
-          <Button handleClick={handleShowResults} className="optionResultButton" label="results" />
+        <div className="row">
+          <div className="col-xs-12">
+            <h3 className={style.title}>MINESWEEPER</h3>
+          </div>
         </div>
-        <div className={style.row}>
-          {/* {!isGameStarted ? (
+
+        <div className="row">
+          <div className="col-xs-3">
             <Button
-              handleClick={handleStart}
-              className="button"
-              disabled={showResults}
-              label="START"
+              handleClick={handleShowOptions}
+              className="optionResultButton"
+              label="Options"
             />
-          ) : (
+          </div>
+          <div className="col-xs-6">
+            <Timer
+              isTimerStarted={isTimerStarted}
+              resetTimer={resetTimer}
+              getTimerValue={getTimerValue}
+            />
+          </div>
+          <div className="col-xs-3">
             <Button
-              handleClick={handleStart}
-              className="button"
-              disabled={showResults}
-              label="END"
+              handleClick={handleShowResults}
+              className="optionResultButton"
+              label="Results"
             />
-          )} */}
-          <Timer
-            isTimerStarted={isTimerStarted}
-            resetTimer={resetTimer}
-            getTimerValue={getTimerValue}
-          />
+          </div>
         </div>
       </div>
     </>

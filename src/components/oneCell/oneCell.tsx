@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import type { typeOneCell } from '../../helpers/types/types';
 import { Color } from '../../helpers/helperFunctions/helperFunctions';
-import style from './oneCell.module.scss';
 import bomb from '../../assets/images/bomb.png';
+import style from './oneCell.module.scss';
 
 const OneCell: FC<typeOneCell> = ({
   oneCell,

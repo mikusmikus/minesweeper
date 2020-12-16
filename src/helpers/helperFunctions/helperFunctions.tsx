@@ -75,6 +75,14 @@ export const countNumber = (cell: Cell, size: number, gridCopy: Grid[][]): numbe
   return count;
 };
 
+export const firstMoveDrawGrid =(cell: Cell, bombCount:number, size:number, grid: Grid[][]): Grid[][] => {
+  const copyGrid = cloneDeep(grid);
+  const gridWithBombs = drawBombs(cell, bombCount, copyGrid);
+  const gridEmtptyFirst = drawAroundFirstClicked(cell, size, gridWithBombs);
+  const gridWithNumber = drawNumbers(size, gridEmtptyFirst);
+  return adjacentCellsNoBombs(cell, size, gridWithNumber);
+};
+
 export const adjacentCellsNoBombs = (cell: Cell, size: number, grid: Grid[][]): Grid[][] => {
   const { rowI, colI } = cell;
   const gridCopy = [...grid];

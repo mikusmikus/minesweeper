@@ -1,6 +1,4 @@
-/* eslint-disable consistent-return */
-/* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cloneDeep, round } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,35 +10,34 @@ import Winner from '../winner/winner';
 import Restart from '../restart/restart';
 import { Options, gameSizeArr, gameDifficultyArr } from '../options/options';
 import type { typeResultObj } from '../../helpers/types/types';
-
 import {
-  drawBombs,
   drawGrid,
-  drawNumbers,
-  drawAroundFirstClicked,
   adjacentCellsNoBombs,
   drawGameOver,
   checkWinner,
+  firstMoveDrawGrid,
 } from '../../helpers/helperFunctions/helperFunctions';
 import 'react-toastify/dist/ReactToastify.css';
 import style from './minesweeper.module.scss';
 
-let isGameOver = false;
-let isWinner = false;
-let isFirstMoveDone = false;
-let isTimerStarted = false;
-let isGridDisabled = false;
-let resetTimer = false;
-let gridSize = 10;
-let difficulty = 10;
-
 export const Minesweeper = () => {
-  const [grid, setGrid] = useState(drawGrid(gridSize));
+  const [grid, setGrid] = useState(drawGrid(10));
   const [showResults, setShowResults] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [winnerName, setWinnerName] = useState('');
   const [results, setResults] = useState<typeResultObj[]>([]);
   const [timer, setTimer] = useState(0);
+
+  const options = useRef({
+    gridSize: 10,
+    difficulty: 10,
+    isGameOver: false,
+    isWinner: false,
+    isFirstMoveDone: false,
+    isTimerStarted: false,
+    isGridDisabled: false,
+    resetTimer: false,
+  });
 
   useEffect(() => {
     const minesweeperStorage = localStorage.getItem('minesweeper');
@@ -55,64 +52,66 @@ export const Minesweeper = () => {
       return;
     }
     if (grid[rowI][colI].cell === 'bomb') {
-      const gameOverGrid = drawGameOver(gridSize, copyGrid);
-      isGameOver = true;
-      isGridDisabled = true;
-      isTimerStarted = false;
+      const gameOverGrid = drawGameOver(options.current.gridSize, copyGrid);
+      options.current.isGameOver = true;
+      options.current.isGridDisabled = true;
+      options.current.isTimerStarted = false;
       setGrid(gameOverGrid);
       return;
     }
-    if (!isFirstMoveDone) {
-      const bombCount = round(gridSize / difficulty);
-      const gridWithBombs = drawBombs(cell, bombCount, copyGrid);
-      const gridEmtptyFirst = drawAroundFirstClicked(cell, gridSize, gridWithBombs);
-      const gridWithNumber = drawNumbers(gridSize, gridEmtptyFirst);
-      const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, gridWithNumber);
-      isTimerStarted = true;
-      // isGameStarted = true;
-      resetTimer = false;
-      setGrid(gridAdjacent);
-      isFirstMoveDone = true;
+    if (!options.current.isFirstMoveDone) {
+      options.current.isTimerStarted = true;
+      options.current.resetTimer = false;
+      options.current.isFirstMoveDone = true;
+      const bombCount = round(options.current.gridSize / options.current.difficulty);
+      const gridFirstMove = firstMoveDrawGrid(cell, bombCount, options.current.gridSize, copyGrid);
+      setGrid(gridFirstMove);
     } else {
-      const gridAdjacent = adjacentCellsNoBombs(cell, gridSize, copyGrid);
+      const gridAdjacent = adjacentCellsNoBombs(cell, options.current.gridSize, copyGrid);
       gridAdjacent[rowI][colI].isOpen = true;
       if (checkWinner(gridAdjacent)) {
-        isTimerStarted = false;
-        isWinner = true;
+        options.current.isTimerStarted = false;
+        options.current.isWinner = true;
       }
       setGrid(gridAdjacent);
     }
   };
+
   const hadleRightClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    index1: number,
-    index2: number
+    rowI: number,
+    colI: number
   ) => {
     e.preventDefault();
     const copyGrid = cloneDeep(grid);
-    copyGrid[index1][index2].haveFlag = !copyGrid[index1][index2].haveFlag;
+    copyGrid[rowI][colI].haveFlag = !copyGrid[rowI][colI].haveFlag;
     setGrid(copyGrid);
   };
 
   const handleRestart = () => {
-    const copyGrid = drawGrid(gridSize);
-    setGrid(copyGrid);
-    isFirstMoveDone = false;
-    isGameOver = false;
-    isGridDisabled = false;
-    isWinner = false;
-    isTimerStarted = false;
-    resetTimer = true;
+    options.current.isFirstMoveDone = false;
+    options.current.isGameOver = false;
+    options.current.isGridDisabled = false;
+    options.current.isWinner = false;
+    options.current.isTimerStarted = false;
+    options.current.resetTimer = true;
     setTimer(0);
+    const copyGrid = drawGrid(options.current.gridSize);
+    setGrid(copyGrid);
   };
+
   const handleWinner = () => {
     if (!winnerName) {
       alert('enter name!');
       return;
     }
     const copyResults = [...results];
-    const findSizeIndex = gameSizeArr.findIndex((item) => item.optionValue === gridSize);
-    const findDiffIndex = gameDifficultyArr.findIndex((item) => item.optionValue === difficulty);
+    const findSizeIndex = gameSizeArr.findIndex(
+      (item) => item.optionValue === options.current.gridSize
+    );
+    const findDiffIndex = gameDifficultyArr.findIndex(
+      (item) => item.optionValue === options.current.difficulty
+    );
 
     const newWinner: typeResultObj = {
       id: uuidv4(),
@@ -121,42 +120,46 @@ export const Minesweeper = () => {
       size: gameSizeArr[findSizeIndex].optionName,
       difficulty: gameDifficultyArr[findDiffIndex].optionName,
     };
-
-    isWinner = false;
-    // isGameStarted = false;
     localStorage.setItem('minesweeper', JSON.stringify([...copyResults, newWinner]));
     setResults([...copyResults, newWinner]);
     setWinnerName('');
     setTimer(0);
-    toast('Result Added!', {
-      position: 'top-right',
-      autoClose: 3000,
-      closeOnClick: true,
-      draggable: true,
+    toast.success('Result added!', {
+      autoClose: 5000,
+      style: {
+        background: '#e07a5f',
+        fontSize: '40px',
+        color: '#3d405b',
+        width: '400px',
+        minHeight: '100px',
+      },
     });
+    handleRestart();
   };
 
   const saveOptionChanges = (size: number, diff: number) => {
-    gridSize = size;
-    difficulty = diff;
-    isTimerStarted = false;
-    resetTimer = true;
-    isFirstMoveDone = false;
-    isGridDisabled = false;
+    options.current.gridSize = size;
+    options.current.difficulty = diff;
+    handleRestart();
     setShowOptions(false);
-    setGrid(drawGrid(size));
   };
 
   return (
-    <div className="conatainer">
+    <div className="container">
       <div className={style.minesweeper}>
         <div className="row">
           <div className="col-xs-12">
             <Header
-              isTimerStarted={isTimerStarted}
-              resetTimer={resetTimer}
-              handleShowOptions={() => setShowOptions(!showOptions)}
-              handleShowResults={() => setShowResults(!showResults)}
+              isTimerStarted={options.current.isTimerStarted}
+              resetTimer={options.current.resetTimer}
+              handleShowOptions={() => {
+                setShowOptions(!showOptions);
+                setShowResults(false);
+              }}
+              handleShowResults={() => {
+                setShowResults(!showResults);
+                setShowOptions(false);
+              }}
               getTimerValue={(time: number) => {
                 setTimer(time);
               }}
@@ -167,8 +170,8 @@ export const Minesweeper = () => {
               handleShowResults={() => setShowResults(false)}
             />
             <Options
-              gameSize={gridSize}
-              gameDifficulty={difficulty}
+              gameSize={options.current.gridSize}
+              gameDifficulty={options.current.difficulty}
               showOptions={showOptions}
               handleShowOptions={() => setShowOptions(false)}
               saveOptionChanges={saveOptionChanges}
@@ -181,7 +184,7 @@ export const Minesweeper = () => {
             <div
               className={style.grid}
               style={{
-                maxWidth: `${gridSize * 25}px`,
+                maxWidth: `${options.current.gridSize * 25}px`,
               }}
             >
               {grid.map((RowArr, rowI) =>
@@ -191,16 +194,19 @@ export const Minesweeper = () => {
                     oneCell={oneCell}
                     hadleRightClick={(e) => hadleRightClick(e, rowI, colI)}
                     handleOpen={() => handleOpen(rowI, colI)}
-                    isGridDisabled={isGridDisabled}
-                    gridSize={gridSize}
+                    isGridDisabled={options.current.isGridDisabled}
+                    gridSize={options.current.gridSize}
                   />
                 ))
               )}
 
-              <Restart handleRestart={() => handleRestart()} isGameOver={isGameOver} />
+              <Restart
+                handleRestart={() => handleRestart()}
+                isGameOver={options.current.isGameOver}
+              />
 
-              {isGameOver && <GameOver />}
-              {isWinner && (
+              {options.current.isGameOver && <GameOver />}
+              {options.current.isWinner && (
                 <Winner
                   winnerName={winnerName}
                   handleWinnerName={(e) => setWinnerName(e.target.value)}
