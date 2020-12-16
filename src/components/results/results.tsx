@@ -10,7 +10,7 @@ const Results: FC<typeResults> = ({ showResults, results, handleShowResults }) =
   return (
     <div className={`${style.results} ${showResults && style.active}`} data-testid="results">
       <Button handleClick={handleShowResults} className="cancelResultsOptions" label="X" />
-      <h5 className={style.heading}>Results</h5>
+      <h5 className={style.heading}>RESULTS</h5>
       <Table tableData={results} />
     </div>
   );
