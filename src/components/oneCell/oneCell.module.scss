@@ -5,6 +5,7 @@ $color-terraCota: #e07a5f;
 $color-independence: #3d405b;
 $color-greenSheen: #81b29a;
 $boxShadowInset: inset 0px 0px 0px 2px $color-independence;
+$boxShadowInsetMobile: inset 0px 0px 0px 1px $color-independence;
 
 .cellClose {
     position: relative;
@@ -58,3 +59,13 @@ $boxShadowInset: inset 0px 0px 0px 2px $color-independence;
     background-size: contain;
     background-position: center;
 }
+
+
+@media all and (max-width: 460px) {
+    .cellClose{
+        box-shadow: $boxShadowInsetMobile;
+    }
+    .cellOpen{
+        box-shadow: $boxShadowInsetMobile;
+    }
+  }

@@ -1,6 +1,7 @@
 $color-eggShell: rgba(244, 241, 222, 0.95);
 $fontSize50: 50px;
 $fontSize24: 24px;
+$fontSize32: 32px;
 
 .results {
     position: absolute;
@@ -30,3 +31,13 @@ $fontSize24: 24px;
     padding-top: 50px;
     text-align: center;
 }
+
+@media all and (max-width: 460px) {
+    .active {
+       height: 100%;
+    }
+    .heading {
+        font-size: $fontSize32;
+        padding-top: 30px;
+    }
+  }

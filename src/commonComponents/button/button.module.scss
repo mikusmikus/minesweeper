@@ -71,3 +71,8 @@ color:$color-independence;
     }
 }
 
+@media all and (max-width: 460px) {
+    .optionResultButton{
+        font-size: $fontSize16;
+    }
+  }

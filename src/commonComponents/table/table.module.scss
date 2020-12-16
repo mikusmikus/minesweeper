@@ -1,6 +1,7 @@
 $color-deepChampagne : #f2cc8f;
 $color-terraCota : #e07a5f;
 $color-greenSheen : #81b29a;
+$fontSize16: 16px;
 
 .table {
     padding: 20px;
@@ -20,3 +21,12 @@ $color-greenSheen : #81b29a;
 .newResult{
     background-color: $color-greenSheen;
 }
+
+@media all and (max-width: 460px) {
+    .tableTh{
+        font-size: $fontSize16;
+    }
+    .tableTr{
+        font-size: $fontSize16;
+    }
+  }

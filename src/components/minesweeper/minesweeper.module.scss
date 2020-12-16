@@ -30,6 +30,18 @@ $color-black: black;
     flex-wrap: wrap;
     border: none;
     padding: 0;
-    box-sizing: content-box;
+    // box-sizing: content-box;
     border: 3px solid $color-independence
 }
+
+@media all and (max-width: 460px) {
+    .minesweeper {
+        margin-top: 0;
+        // min-height: 600px;
+        height: 100vh;
+        box-sizing: border-box;
+    }
+    .grid {
+        margin-top: 60px;
+    }
+  }

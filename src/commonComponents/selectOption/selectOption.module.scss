@@ -36,3 +36,10 @@ $color-deepChampagne : #f2cc8f;
 .option{
     background-color: $color-eggShell;
 }
+
+@media all and (max-width: 460px) {
+    .label{
+        font-size: $fontSize24;
+        margin-top: 15px;
+    }
+  }

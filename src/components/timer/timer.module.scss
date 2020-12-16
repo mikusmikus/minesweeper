@@ -1,4 +1,4 @@
-$fontSize32: 32px;
+$fontSize24: 24px;
 $color-terraCota : #e07a5f;
 $color-deepChampagne: #f2cc8f;
 
@@ -13,3 +13,9 @@ $color-deepChampagne: #f2cc8f;
     font-size: 40px;
     background: linear-gradient(90deg,  $color-terraCota 0%, $color-deepChampagne 50%, $color-terraCota 100%);
 }
+
+@media all and (max-width: 460px) {
+    .timer{
+        font-size: $fontSize24;
+    }
+  }
