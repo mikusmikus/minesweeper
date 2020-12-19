@@ -23,7 +23,7 @@ const Restart: FC<typeRestart> = ({ handleRestart, isGameOver }) => {
             className={style.image}
           />
         )}
-        <Button handleClick={handleRestart} className="restartButton" label="" />
+        <Button handleClick={handleRestart} className={style.restarButton} label="" />
       </div>
     </div>
   );
